@@ -1,0 +1,161 @@
+// .modal-backdrop {
+//   position: fixed;
+//   inset: 0;
+//   background: rgba(0, 0, 0, 0.55);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   z-index: 1000;
+//   animation: fadeIn 0.3s ease;
+// }
+
+// .modal-content {
+//   background: #fff;
+//   border-radius: 10px;
+//   width: 90%;
+//   max-width: 800px;
+//   max-height: 90vh;
+//   overflow-y: auto;
+//   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+//   animation: slideUp 0.35s ease;
+// }
+
+// .modal-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 1rem 1.25rem;
+//   border-bottom: 1px solid #eee;
+
+//   h2 {
+//     font-size: 1.4rem;
+//     font-weight: 600;
+//     color: #333;
+//   }
+
+//   .close-btn {
+//     background: none;
+//     border: none;
+//     font-size: 1.6rem;
+//     cursor: pointer;
+//     color: #888;
+//     transition: color 0.2s ease;
+
+//     &:hover {
+//       color: #e74c3c;
+//     }
+//   }
+// }
+
+// .booking-info {
+//   padding: 1rem 1.25rem;
+//   background: #fafafa;
+//   border-radius: 6px;
+//   margin: 1rem;
+
+//   .info-row {
+//     display: flex;
+//     justify-content: space-between;
+//     margin: 0.4rem 0;
+
+//     .label {
+//       font-weight: 500;
+//       color: #555;
+//     }
+
+//     .value {
+//       color: #222;
+//     }
+//   }
+// }
+
+// .clients-list {
+//   padding: 1rem 1.25rem;
+
+//   .client-card {
+//     border: 1px solid #ddd;
+//     border-radius: 8px;
+//     margin-bottom: 1rem;
+//     overflow: hidden;
+//     transition: box-shadow 0.2s ease;
+
+//     &:hover {
+//       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+//     }
+
+//     .client-header {
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//       background: #f7f7f7;
+//       padding: 0.75rem 1rem;
+//       cursor: pointer;
+
+//       strong {
+//         font-size: 1rem;
+//         color: #333;
+//       }
+
+//       span {
+//         font-weight: 500;
+//         color: #2c3e50;
+//       }
+
+//       .toggle-btn {
+//         background: none;
+//         border: none;
+//         font-size: 1.2rem;
+//         cursor: pointer;
+//         color: #666;
+//         transition: transform 0.2s ease;
+
+//         &:hover {
+//           transform: scale(1.2);
+//           color: #3498db;
+//         }
+//       }
+//     }
+
+//     .client-details {
+//       padding: 0.75rem 1rem;
+//       background: #fff;
+
+//       .block {
+//         margin-top: 0.75rem;
+
+//         strong {
+//           display: block;
+//           margin-bottom: 0.5rem;
+//           color: #444;
+//         }
+
+//         .item-list {
+//           list-style: none;
+//           padding: 0;
+//           margin: 0;
+
+//           li {
+//             margin: 0.3rem 0;
+//           }
+//         }
+//       }
+
+//       .muted {
+//         font-size: 0.9rem;
+//         color: #888;
+//         font-style: italic;
+//       }
+//     }
+//   }
+// }
+
+// /* Animations */
+// @keyframes fadeIn {
+//   from { opacity: 0; }
+//   to { opacity: 1; }
+// }
+
+// @keyframes slideUp {
+//   from { transform: translateY(20px); opacity: 0; }
+//   to { transform: translateY(0); opacity: 1; }
+// }

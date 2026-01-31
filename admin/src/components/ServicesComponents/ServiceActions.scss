@@ -1,0 +1,51 @@
+.service-actions {
+  display: flex;
+  gap: 0.5rem;
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      &:hover {
+        background: none;
+      }
+    }
+
+    &.view {
+      background: #e0f0ff;
+      color: #007bff;
+
+      &:hover:not(:disabled) {
+        background: #cce5ff;
+      }
+    }
+
+    &.edit {
+      background: #fff3cd;
+      color: #856404;
+
+      &:hover:not(:disabled) {
+        background: #ffeeba;
+      }
+    }
+
+    &.delete {
+      background: #f8d7da;
+      color: #721c24;
+
+      &:hover:not(:disabled) {
+        background: #f5c6cb;
+      }
+    }
+  }
+}

@@ -1,0 +1,284 @@
+1. Authentication & Roles (VERY IMPORTANT)
+
+Login + role-based access control (RBAC)
+
+User Roles
+
+Super Admin
+
+Full access
+
+Create admins & roles
+
+Financial reports
+
+Operations Admin
+
+Booking management
+
+Clinician assignment
+
+Clinician
+
+View assigned bookings
+
+Update treatment status
+
+Clinical notes
+
+Customer Support
+
+Messages
+
+Booking queries
+
+Finance
+
+Payments, refunds, reports
+
+Marketing
+
+Promotions, messages, reviews
+
+Permissions
+
+View / Create / Edit / Delete
+
+Feature-based access (not page-based)
+
+2. Booking Management (Core)
+
+View all bookings (table + filters)
+
+Status flow:
+
+Pending → Confirmed → Assigned → In-Progress → Completed → Cancelled
+
+Assign clinician + vehicle
+
+Time & location (Google Maps integration)
+
+Emergency flag 🚨
+
+Reschedule / cancel
+
+Notes (internal vs patient-visible)
+
+Export bookings (CSV / PDF)
+
+3. Service & Package Management
+
+IV Drips (Hydration, Immunity, Energy)
+
+Add-ons (Vitamin C, Glutathione)
+
+Pricing control
+
+Discounts / promo pricing
+
+Availability toggle (Active / Paused)
+
+Duration & contraindications
+
+Service images & descriptions
+
+4. Clinician Management
+
+Clinician profiles
+
+License & certification uploads
+
+Availability calendar
+
+Service qualifications
+
+Performance metrics
+
+Rating & feedback
+
+On-duty / off-duty toggle
+
+5. Inventory & Supplies (Often Missed 🔥)
+
+IV fluids stock
+
+Cannulas, syringes, drugs
+
+Low-stock alerts
+
+Batch & expiry tracking
+
+Usage per booking
+
+Supplier management
+
+6. User & Patient Management
+
+Patient profiles
+
+Medical history (basic)
+
+Allergies & contraindications
+
+Booking history
+
+Communication logs
+
+Blacklist / flag risky cases
+
+7. Messaging & Communication
+
+In-app messages
+
+SMS / WhatsApp integration
+
+Booking confirmations
+
+Automated reminders
+
+Emergency broadcast to clinicians
+
+Admin internal notes
+
+8. Payments & Finance
+
+Payment methods:
+
+M-Pesa
+
+Card
+
+Cash
+
+Payment status tracking
+
+Refund management
+
+Discounts & promo codes
+
+Daily / monthly revenue
+
+Clinician payouts
+
+Export financial reports
+
+9. Analytics & Reports (CEO Dashboard 📊)
+Business Analytics
+
+Total revenue
+
+Booking trends
+
+Popular services
+
+Peak booking times
+
+Customer retention
+
+Clinical Analytics
+
+Services per clinician
+
+Adverse event tracking
+
+Completion times
+
+Marketing Analytics
+
+Promo performance
+
+Conversion rates
+
+Customer acquisition
+
+10. Reviews & Ratings
+
+View patient reviews
+
+Flag inappropriate reviews
+
+Clinician performance scores
+
+Public vs internal feedback
+
+11. Content & Marketing
+
+Homepage banners
+
+Promotions
+
+FAQs
+
+Service descriptions
+
+Push notifications
+
+Email templates
+
+12. System Settings
+
+Service areas (locations)
+
+Working hours
+
+Emergency pricing
+
+Cancellation policy
+
+Terms & privacy
+
+App branding (logo, colors)
+
+13. Security & Audit Logs (Very Professional)
+
+Login history
+
+Admin actions log
+
+Data changes tracking
+
+Failed login alerts
+
+14. Future-Ready (Optional)
+
+Teleconsult integration
+
+Lab requests
+
+Prescription uploads
+
+Insurance handling
+
+Multi-branch support
+
+Suggested Admin Sidebar Structure
+Dashboard
+Bookings
+Services
+Clinicians
+Inventory
+Patients
+Messages
+Payments
+Analytics
+Marketing
+Users & Roles
+Settings
+Audit Logs
+
+
+If you want, next I can:
+
+🧩 Design exact admin page layouts
+
+🧱 Build tables + filters UI
+
+🔐 Implement role-based routing
+
+🧠 Suggest database schema
+
+🔗 Connect to your Node/Express backend
+
+Just tell me what to build next.
+
+Humanize 407 words

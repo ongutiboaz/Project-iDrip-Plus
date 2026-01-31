@@ -1,0 +1,22 @@
+🧪 Add Joi/Zod validation
+
+🔐 Add auth middleware
+
+📦 Add pagination & search
+
+
+1 Add pagination to Shots & Drips
+2️⃣ Add audit logs (who edited what)
+3️⃣ Add soft delete instead of hard delete
+
+mkdir services, controllers, routes, constants
+
+New-Item services\shot.service.js -ItemType File
+New-Item controllers\shot.controller.js -ItemType File
+New-Item routes\shot.routes.js -ItemType File
+New-Item constants\shot.constants.js -ItemType File
+
+New-Item services\drip.service.js -ItemType File
+New-Item controllers\drip.controller.js -ItemType File
+New-Item routes\drip.routes.js -ItemType File
+New-Item constants\drip.constants.js -ItemType File

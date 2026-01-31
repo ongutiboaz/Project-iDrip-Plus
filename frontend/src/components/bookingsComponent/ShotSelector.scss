@@ -1,0 +1,119 @@
+/* ShotSelector.scss
+   Styles for ShotSelector and its AddonList children
+*/
+
+$card-bg: #ffffff;
+$accent: #0b74ff;
+$accent-600: #075fcf;
+$muted: #6b7280;
+$radius: 10px;
+$shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 14px 0;
+
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .service-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid #e6e9ef;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #111827;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #f0f7ff;
+      transform: scale(1.05);
+    }
+
+    &.selected {
+      background: linear-gradient(180deg, $accent, $accent-600);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(11, 116, 255, 0.2);
+    }
+  }
+}
+
+/* AddonList inside ShotSelector */
+.addon-list {
+  background: #fbfdff;
+  border-radius: $radius;
+  padding: 12px;
+  border: 1px solid #eef6ff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  box-shadow: $shadow;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: $accent;
+    box-shadow: 0 6px 18px rgba(11, 116, 255, 0.12);
+  }
+
+  h4 {
+    flex-basis: 100%;
+    margin: 0 0 10px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .pill {
+    margin: 4px;
+  }
+
+  p {
+    flex-basis: 100%;
+    font-size: 0.9rem;
+    color: $muted;
+    margin: 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .service-list .service-options {
+    flex-direction: column;
+
+    .pill {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .addon-list {
+    flex-direction: column;
+
+    .pill {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

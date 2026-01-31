@@ -1,0 +1,144 @@
+.shots-page {
+  font-family: "Inter", sans-serif;
+  color: #333;
+
+  /* HERO SECTION */
+  .shots-hero {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.55)
+      ),
+      url("/images/shots-hero.jpg") center/cover no-repeat;
+    color: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  /* INFO STRIP */
+  .shots-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2.5rem 2rem;
+    background: #f8f9fa;
+
+    .info-card {
+      flex: 1;
+      max-width: 300px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #007bff;
+      }
+
+      p {
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  /* LIST SECTION */
+  .shots-list-section {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .section-desc {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+  }
+
+  /* DISCLAIMER */
+  .shots-disclaimer {
+    background: #fff3cd;
+    border-top: 1px solid #eee;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #856404;
+    font-style: italic;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .shots-page {
+    .shots-hero {
+      padding: 3rem 1.5rem;
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    .shots-info {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+
+      .info-card {
+        max-width: 100%;
+      }
+    }
+
+    .shots-list-section {
+      padding: 2rem 1rem;
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      .section-desc {
+        font-size: 1rem;
+      }
+    }
+  }
+}

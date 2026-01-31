@@ -1,0 +1,112 @@
+.hero {
+  background: linear-gradient(135deg, #f3faff 0%, #ffffff 40%, #e8f3ff 100%);
+  height: 80vh;
+  width: 95vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-self: center;
+  font-size: 3vw;
+  .hero-left {
+    // background-color: red;
+    padding-left: 1em;
+
+    h1 {
+      font-size: 1.5em;
+      font-weight: 800;
+      color: #003b6d;
+      margin-bottom: 0.25em;
+      line-height: 1.15;
+    }
+
+    p {
+      font-size: 0.5em;
+      color: #4c4c4c;
+      margin-bottom: 1em;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+    .hero-btn {
+      background: #0076d6;
+
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 1em;
+      font-size: 0.6em;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.25s ease-in-out;
+      box-shadow: 0 5px 20px rgba(0, 118, 214, 0.25);
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 7px 22px rgba(0, 118, 214, 0.35);
+      }
+    }
+
+    .hero-tags {
+      display: grid;
+      gap: 0.25rem;
+      margin-top: 1.25em;
+      grid-template-columns: repeat(3, max-content);
+      list-style: none;
+      padding: 0;
+
+      li {
+        background: #eef7ff;
+        padding: 0.6em 1.3em;
+        border-radius: 1em;
+        font-size: 0.35em;
+        color: #005a9c;
+        font-weight: 500;
+        border: 1px solid #cfe7ff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        transition: 0.25s ease-in-out;
+        cursor: default;
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+          background: #e2f2ff;
+        }
+      }
+    }
+  }
+  .hero-right{
+    // background-color: yellowgreen;
+    display: grid;
+    justify-items: center;
+    img {
+      width: 90%;
+      max-width: 520px;
+      border-radius: 0 1em 1em 0;
+      object-fit: cover;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      transition: 0.35s ease;
+    }
+
+    img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Glow circle behind image */
+    &::after {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      background: #d9ecff;
+      border-radius: 50%;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(60px);
+      opacity: 0.6;
+    }
+
+
+  }
+  
+}

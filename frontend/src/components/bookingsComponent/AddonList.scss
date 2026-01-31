@@ -1,0 +1,72 @@
+/* AddonList.scss
+   Styles for AddonList component
+*/
+
+$card-bg: #ffffff;
+$accent: #0b74ff;
+$accent-600: #075fcf;
+$muted: #6b7280;
+$radius: 10px;
+$shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+.addon-list {
+  background: #fbfdff;
+  border-radius: $radius;
+  padding: 14px;
+  border: 1px solid #eef6ff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: $shadow;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: $accent;
+    box-shadow: 0 6px 18px rgba(11, 116, 255, 0.12);
+  }
+
+  h4 {
+    flex-basis: 100%;
+    margin: 0 0 10px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid #e6e9ef;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #111827;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #f0f7ff;
+      transform: scale(1.05);
+    }
+
+    &.selected {
+      background: linear-gradient(180deg, $accent, $accent-600);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(11, 116, 255, 0.2);
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .addon-list {
+    flex-direction: column;
+
+    .pill {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

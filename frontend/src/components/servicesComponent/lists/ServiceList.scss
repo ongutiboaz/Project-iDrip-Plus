@@ -1,0 +1,119 @@
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  /* Loading state */
+  p {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+  }
+}
+
+/* Card styling (inherits from DripCard) */
+.service-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+  }
+
+  .content {
+    padding: 1rem;
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: #222;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 1rem;
+
+      span {
+        font-weight: 500;
+
+        &.price {
+          color: #007bff;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .service-btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: #007bff;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.25s ease;
+
+      &:hover {
+        background: #0056b3;
+      }
+    }
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .service-grid {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .service-card {
+    img {
+      height: 150px;
+    }
+
+    .content {
+      h3 {
+        font-size: 1.1rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+
+      .service-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

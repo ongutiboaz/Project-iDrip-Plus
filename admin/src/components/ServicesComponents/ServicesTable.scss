@@ -1,0 +1,108 @@
+/* =========================
+   ServicesTable.scss
+========================= */
+
+.services-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #fff;
+
+  table.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+
+    thead {
+      background: #f5f5f5;
+
+      th {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #333;
+      }
+    }
+
+    tbody {
+      tr {
+        transition: background 0.2s;
+
+        &:hover {
+          background: #fafafa;
+        }
+
+        td {
+          padding: 0.65rem 1rem;
+          font-size: 0.9rem;
+          color: #555;
+          vertical-align: middle;
+
+          &.empty-state {
+            text-align: center;
+            color: #999;
+            padding: 2rem;
+            font-style: italic;
+          }
+
+          /* Actions column */
+          .actions {
+            display: flex;
+            gap: 0.5rem;
+
+            button {
+              background: none;
+              border: none;
+              cursor: pointer;
+              padding: 0.25rem;
+              font-size: 0.9rem;
+
+              &:hover {
+                color: #1890ff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  @media (max-width: 768px) {
+    table.services-table {
+      min-width: 100%;
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+
+        td {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.5rem 0.75rem;
+
+          &:before {
+            content: attr(data-label);
+            font-weight: 600;
+            color: #333;
+          }
+
+          &.empty-state {
+            text-align: center;
+            display: block;
+            padding: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

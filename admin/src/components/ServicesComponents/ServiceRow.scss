@@ -1,0 +1,119 @@
+/* =========================
+   ServicesTable & ServiceRow
+========================= */
+
+.services-table-wrapper {
+  overflow-x: auto;
+
+  table.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: sans-serif;
+
+    thead {
+      background-color: #f0f0f0;
+
+      th {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #333;
+        border-bottom: 2px solid #e0e0e0;
+      }
+    }
+
+    tbody {
+      tr {
+        transition: background 0.2s ease;
+
+        /* Zebra striping */
+        &:nth-child(odd) {
+          background-color: #ffffff;
+        }
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+
+        &:hover {
+          background-color: #f1f7ff;
+        }
+
+        td {
+          padding: 0.65rem 1rem;
+          font-size: 0.9rem;
+          color: #555;
+          vertical-align: middle;
+
+          /* Center numeric values */
+          &:nth-child(5),
+          &:nth-child(6) {
+            text-align: center;
+          }
+
+          /* Status styling */
+          &:nth-child(7) {
+            text-transform: capitalize;
+
+            &.active {
+              color: #0f9d58;
+              font-weight: 600;
+            }
+
+            &.inactive {
+              color: #d93025;
+              font-weight: 600;
+            }
+          }
+
+          /* Actions column */
+          &:last-child {
+            .service-actions {
+              display: flex;
+              gap: 0.5rem;
+              justify-content: flex-start;
+
+              button {
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.25rem;
+                font-size: 0.9rem;
+                color: #555;
+                transition: color 0.2s;
+
+                &:hover {
+                  color: #1890ff;
+                }
+
+                svg {
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+
+    &:before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: #333;
+    }
+
+    &:last-child {
+      justify-content: flex-end;
+    }
+  }
+}

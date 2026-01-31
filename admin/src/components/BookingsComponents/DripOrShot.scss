@@ -1,0 +1,107 @@
+// /* ==============================
+//    DRIP / SHOT CONTAINER
+// ============================== */
+// .drip,
+// .shot {
+//   padding: 12px 14px;
+//   border-bottom: 1px solid #eaeaea;
+//   background: #fff;
+// }
+
+// /* ==============================
+//    HEADER
+// ============================== */
+// .drip-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-bottom: 6px;
+// }
+
+// .drip-name {
+//   font-weight: 600;
+//   font-size: 0.95rem;
+// }
+
+// .drip-price {
+//   font-weight: 600;
+//   font-size: 0.9rem;
+//   color: #111;
+// }
+
+// /* ==============================
+//    ADDON LISTS (COMMON)
+// ============================== */
+// .addon-list {
+//   margin: 6px 0 4px 18px;
+//   padding: 0;
+//   list-style: none;
+// }
+
+// /* Section title (Nutrients / Injectables) */
+// .addon-title {
+//   font-size: 0.78rem;
+//   font-weight: 600;
+//   text-transform: uppercase;
+//   letter-spacing: 0.4px;
+//   color: #777;
+//   margin-bottom: 4px;
+// }
+
+// /* ==============================
+//    ADDON ITEM
+// ============================== */
+// .addon-item {
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
+//   padding: 3px 0;
+//   font-size: 0.88rem;
+// }
+
+// /* icon column */
+// .addon-label {
+//   width: 18px;
+//   text-align: center;
+//   font-size: 0.85rem;
+// }
+
+// /* name column */
+// .addon-name {
+//   flex: 1;
+//   line-height: 1.2;
+// }
+
+// /* price column */
+// .addon-price {
+//   font-weight: 500;
+//   white-space: nowrap;
+// }
+
+// /* ==============================
+//    NUTRIENTS
+// ============================== */
+// .addon-list.nutrients {
+//   .addon-label {
+//     color: #2e7d32; // green
+//   }
+
+//   .addon-name {
+//     color: #1b5e20;
+//   }
+// }
+
+// /* ==============================
+//    INJECTABLES
+// ============================== */
+// .addon-list.injectables {
+//   .addon-label {
+//     color: #c62828; // red
+//   }
+
+//   .addon-name {
+//     color: #8e0000;
+//   }
+// }
+
+

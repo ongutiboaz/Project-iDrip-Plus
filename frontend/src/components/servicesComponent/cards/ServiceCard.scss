@@ -1,0 +1,134 @@
+.service-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  /* IMAGE */
+  .image-wrap {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  /* CONTENT */
+  .service-content {
+    flex: 1; // pushes buttons down
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    .service-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 0.75rem;
+
+      .price {
+        color: #007bff;
+        font-weight: 600;
+      }
+    }
+
+    .service-name-description {
+      flex: 1; // ensures description takes available space
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0 0 0.5rem;
+        color: #222;
+      }
+
+      .desc {
+        display: block;
+        width: 100%;
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  /* BUTTONS */
+  .service-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-top: 1px solid #eee; // separates footer visually
+
+    .service-btn {
+      flex: 1;
+      margin: 0 0.25rem;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      background: #007bff;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.25s ease;
+
+      &:hover {
+        background: #0056b3;
+      }
+
+      &:nth-child(2) {
+        background: #28a745;
+
+        &:hover {
+          background: #1e7e34;
+        }
+      }
+    }
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .service-card {
+    .image-wrap {
+      height: 150px;
+    }
+
+    .service-content {
+      h3 {
+        font-size: 1.1rem;
+      }
+
+      .desc {
+        font-size: 0.9rem;
+      }
+    }
+
+    .service-buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .service-btn {
+        margin: 0;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.payment-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: "Inter", sans-serif;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #222;
+  }
+
+  /* Layout */
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+
+  /* Booking summary column */
+  .booking-summary {
+    align-self: start;
+  }
+
+  /* Actions */
+  .actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 1rem;
+
+    button {
+      padding: 0.7rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 140px;
+    }
+
+    button:first-child {
+      background: #f1f3f4;
+      color: #333;
+
+      &:hover {
+        background: #e4e6e7;
+      }
+    }
+
+    button:last-child {
+      background: #1a73e8;
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(26, 115, 232, 0.3);
+
+      &:hover {
+        background: #1557b0;
+      }
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  /* =====================
+     MOBILE
+  ===================== */
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+
+    .booking-summary {
+      order: 2;
+    }
+
+    .actions {
+      order: 3;
+      flex-direction: column-reverse;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

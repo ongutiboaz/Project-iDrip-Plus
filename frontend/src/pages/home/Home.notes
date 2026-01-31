@@ -1,0 +1,160 @@
+✅ What else should be on your Home Page
+
+Below is the ideal full layout (in order):
+
+1️⃣ Hero Section
+
+✔ You already have this.
+✔ Strong headline + call-to-action (Book a Drip).
+✔ Image of IV therapy / clinician.
+
+2️⃣ Why Choose Us (3–5 key benefits)
+
+Short cards that highlight trust + safety.
+
+Examples:
+
+Licensed medical clinicians
+
+Fast mobile delivery
+
+Safe & sterile procedures
+
+24/7 availability
+
+Lab-tested medications
+
+3️⃣ Popular Drips (Packages Section)
+
+Show 4–6 main packages with prices.
+
+Examples:
+
+Hydration Drip
+
+Immunity Boost
+
+Energy & Performance
+
+Hangover Relief
+
+Beauty/Glow Drip
+
+NAD+ Therapy
+
+Each card:
+
+Image
+
+Short description
+
+Price
+
+“Book Now” button
+
+4️⃣ How It Works (Simple 3 Steps)
+
+People love seeing simplicity.
+
+Example:
+
+Choose a drip
+
+Clinician comes to your location
+
+Get infused in 45–60 minutes
+
+Use icons for each.
+
+5️⃣ About Us (Trust builder)
+
+Short paragraph about iDripPlus.
+Include:
+
+Experience
+
+Professionalism
+
+Areas served (Nairobi)
+
+Safety protocols
+
+Add a small photo of a clinician.
+
+6️⃣ Testimonials
+
+Customer reviews build massive trust.
+
+Format:
+✔ 3–6 review cards
+✔ Star ratings
+✔ Short quotes
+✔ Optional client photos
+
+7️⃣ Service Areas
+
+List places you serve:
+
+Westlands
+
+Lavington
+
+Kilimani
+
+Kileleshwa
+
+Karen
+
+CBD
+
+…etc.
+
+Include a small map.
+
+8️⃣ FAQ Section
+
+Top things people ask:
+
+“Is IV therapy safe?”
+
+“How long does it take?”
+
+“Do you come to homes & hotels?”
+
+“Can pregnant women get IV therapy?”
+
+“How do I book?”
+
+Use collapsible dropdowns.
+
+9️⃣ Call-to-Action (CTA Banner)
+
+At the bottom:
+
+“Ready to feel better today?”
+Button: Book a Drip
+
+With a light background.
+
+🔟 Footer
+
+Include:
+
+Links
+
+Socials
+
+Contact
+
+Terms & privacy
+
+🔥 Want me to generate the actual JSX & SCSS for each section?
+
+I can build:
+
+✔ WhyChooseUs.jsx + scss
+✔ Packages.jsx + scss
+✔ HowItWorks.jsx + scss
+✔ Testimonials.jsx + scss
+✔ FAQ.jsx + scss
+✔ Footer.jsx

@@ -1,0 +1,150 @@
+.navbar {
+  background-color: #fff;
+  width: 100vw;
+  height: 15vh;
+  display: grid;
+  align-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  font-size: 4vw;
+
+  .navbar-container {
+    display: grid;
+    grid-template-columns: max-content auto max-content;
+    align-items: center;
+    margin: 0 0.5em 0 0.5em;
+
+    .navbar-logo {
+      display: grid;
+      align-items: center;
+      text-decoration: none;
+      img {
+        width: 3em;
+      }
+    }
+
+    .navbar-menu li .active {
+      color: red; // highlight
+      font-weight: 600; // bolder
+      border-bottom: 2px solid red;
+    }
+
+    .desktop-menu {
+      //  display: none; // hidden on mobile
+      display: grid;
+      grid-template-columns: repeat(5, max-content);
+      justify-content: end;
+      gap: 0.35em;
+      margin-right: 1em;
+
+      list-style: none;
+
+      li {
+        // margin-left: 0.5em;
+        // background-color: yellow;
+        display: flex;
+        align-items: center;
+
+        a {
+          text-decoration: none;
+          color: #202231;
+          font-weight: 500;
+          font-size: 0.3em;
+
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #1d4ed8; // Tailwind blue-500
+          }
+        }
+      }
+    }
+
+    .navbar-booking-button {
+      background-color: #1d4ed8; // blue-600
+      color: #ffffff;
+      padding: 0.6em 1.4em;
+      border: none;
+      border-radius: 1em;
+      font-size: 0.35em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background-color: #2563eb; // blue-700
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  /* Logo */
+
+  /* Hamburger for mobile */
+  .navbar-hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 0.5em;
+    cursor: pointer;
+    color: #111;
+
+    .icon-menu,
+    .icon-close {
+      font-size: 2rem;
+    }
+  }
+
+  /* Desktop menu hidden by default on mobile */
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    li {
+      margin: 0.5rem 0;
+
+      a {
+        font-size: 1.1rem;
+        text-decoration: none;
+        color: #111;
+        font-weight: 500;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #1d4ed8;
+        }
+      }
+    }
+  }
+
+  /* Responsive breakpoints */
+  @media (min-width: 768px) {
+    .navbar-hamburger {
+      display: none;
+    }
+
+    .desktop-menu {
+      display: grid;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+// Drip.jsx (page)
+//   └── DripList.jsx  (fetches drips)
+//         └── DripCard.jsx (summary card)
+//               └── "View More"
+//                     → /drips/:id
+//                           └── DripDetails.jsx (full drip)

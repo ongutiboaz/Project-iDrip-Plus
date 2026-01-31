@@ -1,0 +1,215 @@
+/* Booking.scss
+   Enhanced styles with interactivity and responsiveness
+*/
+
+:root {
+  --bg: #f7f8fb;
+  --card: #ffffff;
+  --accent: #0b74ff;
+  --accent-600: #075fcf;
+  --danger: #ef4444;
+  --muted: #6b7280;
+  --radius: 10px;
+  --shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  --font-stack: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Page layout */
+.booking-page {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--bg);
+  font-family: var(--font-stack);
+  transition: background 0.3s ease;
+}
+
+.booking-container,
+.booking-sidebar {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(11, 116, 255, 0.12);
+  }
+}
+
+.booking-container { flex: 2; }
+.booking-sidebar { flex: 1; min-width: 280px; }
+
+/* Step wrapper */
+.step {
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0 0 16px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px;
+    margin-bottom: 16px;
+    border: 1px solid #eef2f7;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-color: var(--accent);
+    }
+
+    h3 {
+      margin: 0 0 10px 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+  }
+}
+
+/* Options buttons */
+.options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+
+  button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e6e9ef;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    color: #111827;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #f0f7ff;
+      transform: scale(1.03);
+    }
+
+    &.active {
+      background: linear-gradient(180deg, var(--accent), var(--accent-600));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(11, 116, 255, 0.2);
+    }
+  }
+}
+
+/* Inputs */
+.step input,
+.address-form input {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ef;
+  background: #fff;
+  font-size: 0.95rem;
+  color: #111827;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(11, 116, 255, 0.06);
+  }
+}
+
+/* Navigation buttons */
+.next-btn,
+.step button {
+  margin-top: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.next-btn {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(11, 116, 255, 0.12);
+
+  &:hover {
+    transform: translateY(-2px);
+    background: var(--accent-600);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.step button {
+  background: #fff;
+  border: 1px solid #e6e9ef;
+  color: #111827;
+
+  &:hover {
+    background: #f9fafb;
+  }
+}
+
+/* Sidebar summary cards */
+.booking-sidebar .summary-card {
+  background: #fbfdff;
+  border: 1px solid #eef2f7;
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: var(--gap);
+  box-shadow: 0 2px 6px rgba(2, 6, 23, 0.05);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateX(4px);
+  }
+
+  h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .summary-total strong {
+    color: var(--accent);
+    font-size: 1.05rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .booking-page {
+    flex-direction: column;
+
+    .booking-container,
+    .booking-sidebar {
+      width: 100%;
+    }
+  }
+}
+
+

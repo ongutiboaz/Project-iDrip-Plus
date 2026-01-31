@@ -1,0 +1,56 @@
+.service-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: #f8f8f8;
+  border-radius: 10px;
+  border: 1px solid #cfe5ff;
+
+  button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #1c2025;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba(0, 118, 214, 0.1);
+      color: #003b6d;
+    }
+
+    &.active {
+      background: #0076d6;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 118, 214, 0.3);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .service-tabs {
+    width: 100%;
+    justify-content: space-between;
+
+    button {
+      flex: 1;
+      padding: 0.45rem 0;
+      text-align: center;
+    }
+  }
+}
