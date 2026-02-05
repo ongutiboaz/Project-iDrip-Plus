@@ -1,33 +1,17 @@
-import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import dns from "dns";
+import connectDB from "./config/db.js";
+import app from "./app.js";
 
-import {connectDB} from "./config/db.js";
+dns.setDefaultResultOrder("ipv4first");
 dotenv.config();
 
-const app = express();
+console.log("MONGO_URI =", process.env.MONGO_URI); // Debug line
 
-/* ===================== Middleware ===================== */
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-/* ===================== Health Check ===================== */
-app.get("/", (req, res) => {
-  res.json({ status: "Server running 🚀" });
-});
-
-/* ===================== MongoDB Connection ===================== */
+// Connect MongoDB
 connectDB();
-mongoose.set("debug", true);
 
-/* ===================== Routes ===================== */
-// app.use("/api/auth", authRoutes);
-// app.use("/api/payments", mpesaRoutes);
-// app.use("/api/bookings", bookingRoutes);
-
-/* ===================== Server ===================== */
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+// Start server
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`🚀 Server running on port ${process.env.PORT || 5000}`);
 });
