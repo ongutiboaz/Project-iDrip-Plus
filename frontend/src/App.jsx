@@ -15,7 +15,10 @@ import Shots from "./pages/shots/Shots";
 import ShotDetails from "./components/servicesComponent/details/ShotDetails";
 import DripDetails from "./components/servicesComponent/details/DripDetails";
 import PaymentPage from "./pages/payment/PaymentPage";
+
+
 import BookingSummary from "./components/bookingsComponent/BookingSummary";
+import MpesaTest from "./pages/mpesatest/mpesatest";
 
 // Pages
 // impo
@@ -43,6 +46,7 @@ const App = () => {
         <Route path="/booking-summary" element={<BookingSummary />} />
 
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/mpesa" element={<MpesaTest />} />
         {/* <Route path="/confirmation" element={<ConfirmationPage />} /> */}
       </Routes>
       <Footer></Footer>
