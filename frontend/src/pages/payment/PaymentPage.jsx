@@ -1,86 +1,116 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function Payment() {
-  const [bookingId, setBookingId] = useState("");
-  const [phone, setPhone] = useState("");
-  const [amount, setAmount] = useState("");
-  const [loading, setLoading] = useState(false);
+import PaymentMethodSelector from "../../components/paymentComponents/PaymentMethodSelector";
+import MpesaPayment from "../../components/paymentComponents/mpesaComponents/MpesaPayment";
 
-  const payMpesa = async () => {
-    try {
-      setLoading(true);
+const PaymentPage = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
-      console.log("➡️ Sending MPESA request:", {
-        bookingId,
-        amount,
-        phone,
-      });
+  const [booking, setBooking] = useState(null);
+  const [method, setMethod] = useState("mpesa");
 
-      const res = await axios.post("/api/payments", {
-        bookingId,
-        method: "mpesa",
-        amount: Number(amount),
-        phone: normalizePhone(phone),
-        payerName: "Test User",
-      });
-
-      console.log("✅ MPESA RESPONSE:", res.data);
-      console.log(
-        "📲 CheckoutRequestID:",
-        res.data.payment.checkoutRequestID
-      );
-    } catch (err) {
-      console.error(
-        "❌ MPESA ERROR:",
-        err.response?.data || err.message
-      );
-    } finally {
-      setLoading(false);
+  // ---------------- Guard + Restore ----------------
+  useEffect(() => {
+    if (state?.bookingId) {
+      setBooking(state);
+      sessionStorage.setItem("currentBooking", JSON.stringify(state));
+    } else {
+      // Try to restore from sessionStorage
+      const savedBooking = sessionStorage.getItem("currentBooking");
+      if (savedBooking) {
+        setBooking(JSON.parse(savedBooking));
+      } else {
+        navigate("/booking"); // No data → redirect
+      }
     }
-  };
+  }, [state, navigate]);
+
+  if (!booking) return null; // Prevent rendering before booking loaded
+
+  const {
+    bookingId,
+    bookingNumber,
+    amount,
+    phone,
+    bookingDateTime,
+  } = booking;
 
   return (
-    <div style={{ padding: 20 }}>
-      <h3>MPESA Test</h3>
+    <div className="payment-page">
+      <h1>Complete Your Payment</h1>
 
-      <input
-        placeholder="Booking ID"
-        value={bookingId}
-        onChange={(e) => setBookingId(e.target.value)}
-      />
+      {/* ---------------- Booking Summary ---------------- */}
+      <section className="payment-summary">
+        <h2>Booking Summary</h2>
+        <ul>
+          <li>
+            <strong>Booking Number:</strong> {bookingNumber}
+          </li>
+          <li>
+            <strong>Booking Date:</strong>{" "}
+            {bookingDateTime
+              ? new Date(bookingDateTime).toLocaleString()
+              : "N/A"}
+          </li>
+          <li>
+            <strong>Amount to Pay:</strong> KES {amount.toLocaleString()}
+          </li>
+          <li>
+            <strong>Phone:</strong> {phone}
+          </li>
+          <li>
+            <strong>Payment Method:</strong> {method.toUpperCase()}
+          </li>
+        </ul>
+      </section>
 
-      <br /><br />
+      {/* ---------------- Payment Method Selector ---------------- */}
+      <section className="payment-method-selector">
+        <h2>Choose Payment Method</h2>
+        <PaymentMethodSelector method={method} setMethod={setMethod} />
+      </section>
 
-      <input
-        placeholder="Phone (07...)"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-      />
+      {/* ---------------- Payment Action ---------------- */}
+      <section className="payment-action">
+        {method === "mpesa" && (
+          <MpesaPayment
+            bookingId={bookingId}
+            bookingNumber={bookingNumber}
+            amount={amount}
+            phone={phone}
+          />
+        )}
 
-      <br /><br />
+        {method === "cash" && (
+          <div className="cash-info">
+            <p>
+              <strong>Cash Payment:</strong> Pay in person at the clinic or at
+              your home visit.
+            </p>
+          </div>
+        )}
 
-      <input
-        placeholder="Amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
+        {method === "card" && (
+          <div className="card-info">
+            <p>
+              <strong>Card Payment:</strong> Coming soon 💳. You will be able to
+              pay using Visa, Mastercard, or mobile banking.
+            </p>
+          </div>
+        )}
+      </section>
 
-      <br /><br />
-
-      <button onClick={payMpesa} disabled={loading}>
-        {loading ? "Sending..." : "Send MPESA"}
-      </button>
+      {/* ---------------- Optional Notes / Help ---------------- */}
+      <section className="payment-notes">
+        <p>
+          After completing the payment, your booking status will automatically
+          update. For assistance, contact us at <strong>+254 XXXXXXXX</strong>.
+        </p>
+      </section>
     </div>
   );
-}
-
-/* ======================
-   PHONE NORMALIZER
-====================== */
-const normalizePhone = (phone) => {
-  if (!phone) return "";
-  if (phone.startsWith("+254")) return phone.slice(1);
-  if (phone.startsWith("0")) return `254${phone.slice(1)}`;
-  return phone;
 };
+
+export default PaymentPage;

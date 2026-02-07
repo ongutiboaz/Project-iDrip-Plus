@@ -37,13 +37,14 @@ const EXTRA_CHARGE_CITIES = [
 export default function Booking() {
   const navigate = useNavigate();
 
+  // ---------------- STATES ----------------
   const [step, setStep] = useState(1);
   const [bookingType, setBookingType] = useState("individual");
   const [groupCount, setGroupCount] = useState(1);
   const [locationType, setLocationType] = useState("clinic");
 
   const [bookingDate, setBookingDate] = useState(
-    new Date().toISOString().split("T")[0],
+    new Date().toISOString().split("T")[0]
   );
   const [time, setTime] = useState("");
 
@@ -114,7 +115,7 @@ export default function Booking() {
   // ---------------- CLIENT HELPERS ----------------
   const updateClient = (index, updates) => {
     setClients((prev) =>
-      prev.map((c, i) => (i === index ? { ...c, ...updates } : c)),
+      prev.map((c, i) => (i === index ? { ...c, ...updates } : c))
     );
   };
 
@@ -132,12 +133,16 @@ export default function Booking() {
     });
   };
 
+  const removeClient = (index) => {
+    setClients((prev) => prev.filter((_, i) => i !== index));
+    setGroupCount((prev) => Math.max(1, prev - 1));
+    setBookingType(groupCount - 1 > 1 ? "group" : "individual");
+  };
+
   // ---------------- SAVE BOOKING ----------------
   const proceedToPayment = async () => {
   // ---------- VALIDATION ----------
-  if (!time) {
-    return alert("Please select a booking time");
-  }
+  if (!time) return alert("Please select a booking time");
 
   for (let i = 0; i < clientsWithTotals.length; i++) {
     const c = clientsWithTotals[i];
@@ -149,11 +154,9 @@ export default function Booking() {
     }
   }
 
-  // ---------- NORMALIZE CITY ----------
   const normalizedCity =
     address.city.charAt(0).toUpperCase() + address.city.slice(1).toLowerCase();
 
-  // ---------- HELPERS ----------
   const mapNutrients = (items = []) =>
     items.map((n) => ({
       nutrientId: n._id,
@@ -168,7 +171,6 @@ export default function Booking() {
       priceAtBooking: s.priceAtBooking ?? s.price ?? 0,
     }));
 
-  // ---------- MAP CLIENTS ----------
   const payloadClients = clientsWithTotals.map((c) => ({
     firstName: c.firstName,
     secondName: c.secondName,
@@ -176,8 +178,6 @@ export default function Booking() {
     decideAtHome: c.decideAtHome,
     serviceType: c.serviceType,
     notes: c.notes || "",
-    total: c.total, // UI-only, backend recalculates
-
     selectedDrips: c.selectedDrips?.map((d) => ({
       dripId: d._id,
       name: d.name,
@@ -187,7 +187,6 @@ export default function Booking() {
         shots: mapShots(d.addons?.shots),
       },
     })) || [],
-
     selectedShots: c.selectedShots?.map((s) => ({
       shotId: s._id,
       name: s.name,
@@ -196,7 +195,6 @@ export default function Booking() {
     })) || [],
   }));
 
-  // ---------- BUILD PAYLOAD ----------
   const bookingPayload = {
     bookingType,
     bookingDateTime: new Date(`${bookingDate}T${time}`),
@@ -204,11 +202,9 @@ export default function Booking() {
     address: { ...address, city: normalizedCity },
     contact,
     clients: payloadClients,
-    totalAmount, // UI hint only — backend recalculates
     status: "pending",
   };
 
-  // ---------- API CALL ----------
   try {
     const res = await fetch("http://localhost:5000/api/bookings", {
       method: "POST",
@@ -219,126 +215,23 @@ export default function Booking() {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || "Booking failed");
 
-    navigate("/payment", { state: { bookingId: data.bookingId } });
+    // ---------- SAVE TO SESSION STORAGE ----------
+    const bookingForPayment = {
+      bookingId: data._id,
+      bookingNumber: data.bookingNumber,
+      amount: data.totalAmount,
+      phone: contact.phone,
+      bookingDateTime: data.bookingDateTime,
+    };
+    sessionStorage.setItem("currentBooking", JSON.stringify(bookingForPayment));
+
+    // ---------- NAVIGATE TO PAYMENT ----------
+    navigate("/payment", { state: bookingForPayment });
   } catch (err) {
     console.error("Booking save failed:", err);
     alert(err.message || "Booking failed");
   }
 };
-
-  
-
-  
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -376,6 +269,7 @@ export default function Booking() {
             loading={loading}
             updateClient={updateClient}
             adjustGroup={adjustGroup}
+            removeClient={removeClient}
             onBack={() => setStep(1)}
             proceedToPayment={proceedToPayment}
           />

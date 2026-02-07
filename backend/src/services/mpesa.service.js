@@ -1,7 +1,12 @@
 import axios from "axios";
-import { getAccessToken, BASE_URL } from "../config/mpesa.config.js";
+import { getAccessToken } from "../config/mpesaAuth.js";
 
-export const stkPushService = async ({ phone, amount }) => {
+export const initiateStkPush = async ({
+  phone,
+  amount,
+  accountReference,
+  transactionDesc,
+}) => {
   const token = await getAccessToken();
 
   const timestamp = new Date()
@@ -14,7 +19,7 @@ export const stkPushService = async ({ phone, amount }) => {
   ).toString("base64");
 
   const response = await axios.post(
-    `${BASE_URL}/mpesa/stkpush/v1/processrequest`,
+    `${process.env.MPESA_ENV}/mpesa/stkpush/v1/processrequest`,
     {
       BusinessShortCode: process.env.MPESA_SHORTCODE,
       Password: password,
@@ -25,12 +30,13 @@ export const stkPushService = async ({ phone, amount }) => {
       PartyB: process.env.MPESA_SHORTCODE,
       PhoneNumber: phone,
       CallBackURL: process.env.MPESA_CALLBACK_URL,
-      AccountReference: "IDRIP",
-      TransactionDesc: "Payment",
+      AccountReference: accountReference,
+      TransactionDesc: transactionDesc,
     },
     {
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     }
   );

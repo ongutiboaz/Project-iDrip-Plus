@@ -10,20 +10,27 @@ export default function StepTwo({
   removeClient,
   adjustGroup,
   onBack,
-  proceedToPayment, // ✅ ONLY responsibility
+  proceedToPayment,
 }) {
   return (
-    <div className="step active">
-      <h2>Client Services & Addons</h2>
+    <section className="step step-two active">
+      <section className="step-title">
+        <h2>Client Services & Add-ons</h2>
+        <p>Select the services for each person in this booking.</p>
+      </section>
 
-      {loading && <p>Loading services...</p>}
+      {loading && (
+        <section className="loading">
+          <p>Loading services…</p>
+        </section>
+      )}
 
-      <div className="clients-list">
-        {clients.map((client, idx) => (
+      <section className="clients-list">
+        {clients.map((client, index) => (
           <ClientCard
-            key={idx}
+            key={index}
             client={client}
-            index={idx}
+            index={index}
             drips={drips}
             shots={shots}
             loading={loading}
@@ -32,31 +39,35 @@ export default function StepTwo({
             showRemove={clients.length > 1}
           />
         ))}
-      </div>
+      </section>
 
-      <div className="add-client">
+      <section className="add-client">
         <button
           type="button"
           className="add-btn"
           onClick={() => adjustGroup(clients.length + 1)}
         >
-          + Add Person
+          + Add Another Person
         </button>
-      </div>
+      </section>
 
-      <div className="step-actions">
-        <button type="button" className="back-btn" onClick={onBack}>
+      <section className="step-actions">
+        <button
+          type="button"
+          className="back-btn"
+          onClick={onBack}
+        >
           Back
         </button>
 
         <button
           type="button"
           className="next-btn"
-          onClick={proceedToPayment} // ✅ WORKS
+          onClick={proceedToPayment}
         >
           Proceed to Payment
         </button>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }

@@ -151,7 +151,6 @@ const BookingSchema = new mongoose.Schema(
     bookingNumber: {
       type: String,
       unique: true,
-      index: true,
       immutable: true,
     },
     bookingType: {
