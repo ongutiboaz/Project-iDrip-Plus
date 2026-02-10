@@ -40,7 +40,7 @@ const ClientSchema = new mongoose.Schema({
     },
   },
   decideAtHome: { type: Boolean, default: false },
- 
+
 
 
   serviceType: {
@@ -163,11 +163,13 @@ const BookingSchema = new mongoose.Schema(
       enum: ["pending", "confirmed", "completed", "cancelled"],
       default: "pending",
     },
-    paymentStatus: {
-      type: String,
-      enum: ["unpaid", "partial", "paid"],
-      default: "unpaid",
-    },
+   paymentStatus: {
+  type: String,
+  enum: ["unpaid", "pending", "paid", "failed", "pay_on_visit"],
+  default: "unpaid",
+},
+
+
     // Booking.model.js
     locked: {
       type: Boolean,
@@ -363,7 +365,7 @@ BookingSchema.virtual("calculatedTotal").get(function () {
 // INDEXES
 // =======================
 // Core
-BookingSchema.index({ bookingNumber: 1 });
+
 
 BookingSchema.index({ bookingDateTime: 1 });
 

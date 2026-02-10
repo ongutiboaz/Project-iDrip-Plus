@@ -1,32 +1,59 @@
-// Payment.model.js
 import mongoose from "mongoose";
+
 const paymentSchema = new mongoose.Schema(
   {
     booking: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Booking",
       required: true,
+      index: true,
     },
-    name: { type: String, required: true },
-    mpesaPhone: { type: String, required: true },
-    amount: { type: Number, required: true },
-    paymentRequired: { type: Boolean, default: true },
-    method: { type: String, enum: ["mpesa"], default: "mpesa" },
+
+    bookingNumber: {
+      type: String,
+      required: true,
+      index: true,
+    },
+
+    method: {
+      type: String,
+      enum: ["mpesa", "card", "cash"],
+      required: true,
+    },
+
+    amount: {
+      type: Number,
+      required: true,
+    },
+     attemptNumber: { type: Number, required: true },
+
     status: {
       type: String,
-      enum: ["pending", "initiated", "success", "failed", "cancelled"],
+      enum: ["pending", "success", "failed", "cancelled"],
       default: "pending",
     },
-    checkoutRequestID: { type: String, unique: true, sparse: true },
-    mpesaReceipt: { type: String, unique: true, sparse: true },
-  },
-  { timestamps: true },
-);
 
-// Prevent duplicate success updates
-paymentSchema.index(
-  { checkoutRequestID: 1, status: 1 },
-  { unique: true, partialFilterExpression: { status: "success" } },
+    // ===== MPESA ONLY =====
+    phone: String,
+    checkoutRequestId: String,
+    merchantRequestId: String,
+    mpesaReceiptNumber: String,
+    mpesaResultCode: Number,
+    mpesaResultDesc: String,
+
+    // ===== CARD ONLY =====
+    cardProvider: String,         // Stripe, Flutterwave
+    cardTransactionId: String,
+    cardLast4: String,
+    cardBrand: String,
+
+    // ===== CASH ONLY =====
+    cashReceivedBy: String,
+    cashReceiptNumber: String,
+
+    paidAt: Date,
+  },
+  { timestamps: true }
 );
 
 export default mongoose.model("Payment", paymentSchema);

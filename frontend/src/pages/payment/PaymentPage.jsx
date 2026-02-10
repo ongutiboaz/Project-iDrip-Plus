@@ -1,114 +1,94 @@
-import { useState, useEffect } from "react";
+// src/pages/payment/PaymentPage.jsx
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import PaymentMethodSelector from "../../components/paymentComponents/PaymentMethodSelector";
-import MpesaPayment from "../../components/paymentComponents/mpesaComponents/MpesaPayment";
+import MpesaPayment from "../../components/paymentComponents/MpesaPayment";
+import CardPayment from "../../components/paymentComponents/CardPayment";
+import CashPayment from "../../components/paymentComponents/CashPayment";
 
 const PaymentPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-
   const [booking, setBooking] = useState(null);
   const [method, setMethod] = useState("mpesa");
 
-  // ---------------- Guard + Restore ----------------
   useEffect(() => {
     if (state?.bookingId) {
       setBooking(state);
       sessionStorage.setItem("currentBooking", JSON.stringify(state));
     } else {
-      // Try to restore from sessionStorage
-      const savedBooking = sessionStorage.getItem("currentBooking");
-      if (savedBooking) {
-        setBooking(JSON.parse(savedBooking));
-      } else {
-        navigate("/booking"); // No data → redirect
-      }
+      const saved = sessionStorage.getItem("currentBooking");
+      if (saved) setBooking(JSON.parse(saved));
+      else navigate("/booking");
     }
   }, [state, navigate]);
 
-  if (!booking) return null; // Prevent rendering before booking loaded
+  if (!booking) return null;
 
-  const {
-    bookingId,
-    bookingNumber,
-    amount,
-    phone,
-    bookingDateTime,
-  } = booking;
+  const commonProps = {
+    bookingId: booking.bookingId,
+    bookingNumber: booking.bookingNumber,
+    amount: booking.amount,
+    phone: booking.phone,
+    onSuccess: () => navigate("/payment-success"),
+    onFailure: () => navigate("/payment-failed"),
+  };
 
   return (
-    <div className="payment-page">
-      <h1>Complete Your Payment</h1>
+    <div className="payment-page" style={{ maxWidth: "600px", margin: "2rem auto", padding: "0 1rem" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Complete Payment</h1>
 
-      {/* ---------------- Booking Summary ---------------- */}
-      <section className="payment-summary">
-        <h2>Booking Summary</h2>
-        <ul>
-          <li>
-            <strong>Booking Number:</strong> {bookingNumber}
-          </li>
-          <li>
-            <strong>Booking Date:</strong>{" "}
-            {bookingDateTime
-              ? new Date(bookingDateTime).toLocaleString()
-              : "N/A"}
-          </li>
-          <li>
-            <strong>Amount to Pay:</strong> KES {amount.toLocaleString()}
-          </li>
-          <li>
-            <strong>Phone:</strong> {phone}
-          </li>
-          <li>
-            <strong>Payment Method:</strong> {method.toUpperCase()}
-          </li>
-        </ul>
-      </section>
+      {/* --- Booking Summary Card --- */}
+      <div
+        className="booking-summary-card"
+        style={{
+          background: "#f9fafb",
+          border: "1px solid #e5e7eb",
+          borderRadius: "12px",
+          padding: "1.5rem",
+          marginBottom: "2rem",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+        }}
+      >
+        <h2 style={{ marginBottom: "1rem", color: "#111827" }}>Booking Summary</h2>
 
-      {/* ---------------- Payment Method Selector ---------------- */}
-      <section className="payment-method-selector">
-        <h2>Choose Payment Method</h2>
-        <PaymentMethodSelector method={method} setMethod={setMethod} />
-      </section>
-
-      {/* ---------------- Payment Action ---------------- */}
-      <section className="payment-action">
-        {method === "mpesa" && (
-          <MpesaPayment
-            bookingId={bookingId}
-            bookingNumber={bookingNumber}
-            amount={amount}
-            phone={phone}
-          />
-        )}
-
-        {method === "cash" && (
-          <div className="cash-info">
-            <p>
-              <strong>Cash Payment:</strong> Pay in person at the clinic or at
-              your home visit.
-            </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem 1.5rem" }}>
+          <div>
+            <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Booking Number</p>
+            <p style={{ margin: 0 }}>{booking.bookingNumber}</p>
           </div>
-        )}
-
-        {method === "card" && (
-          <div className="card-info">
-            <p>
-              <strong>Card Payment:</strong> Coming soon 💳. You will be able to
-              pay using Visa, Mastercard, or mobile banking.
-            </p>
+          <div>
+            <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Patient Name</p>
+            <p style={{ margin: 0 }}>{booking.patientName || booking.name}</p>
           </div>
-        )}
-      </section>
+          <div>
+            <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Service</p>
+            <p style={{ margin: 0 }}>{booking.serviceName || booking.service}</p>
+          </div>
+          <div>
+            <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Amount</p>
+            <p style={{ margin: 0 }}>KES {booking.amount}</p>
+          </div>
+          <div>
+            <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Phone</p>
+            <p style={{ margin: 0 }}>{booking.phone}</p>
+          </div>
+          <div>
+            <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Date</p>
+            <p style={{ margin: 0 }}>{booking.date || new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+      </div>
 
-      {/* ---------------- Optional Notes / Help ---------------- */}
-      <section className="payment-notes">
-        <p>
-          After completing the payment, your booking status will automatically
-          update. For assistance, contact us at <strong>+254 XXXXXXXX</strong>.
-        </p>
-      </section>
+      {/* --- Payment Methods --- */}
+      <PaymentMethodSelector method={method} setMethod={setMethod} />
+
+      <div style={{ marginTop: "1.5rem" }}>
+        {method === "mpesa" && <MpesaPayment {...commonProps} />}
+        {method === "card" && <CardPayment {...commonProps} />}
+        {method === "cash" && <CashPayment {...commonProps} />}
+      </div>
     </div>
   );
 };

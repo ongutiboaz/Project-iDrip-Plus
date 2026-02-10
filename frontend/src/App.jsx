@@ -19,6 +19,8 @@ import Booking from "./pages/booking/Booking";
 import BookingSummary from "./components/bookingsComponent/BookingSummary";
 import PaymentPage from "./pages/payment/PaymentPage";
 import MpesaTest from "./pages/mpesatest/mpesatest";
+import PaymentSuccess from "./pages/payment/PaymentSuccess";
+import PaymentFailed from "./pages/payment/PaymentFailed";
 
 // Optional: You can add a confirmation page later
 // import ConfirmationPage from "./pages/confirmation/ConfirmationPage";
@@ -49,9 +51,10 @@ const App = () => {
         {/* Payment */}
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/mpesa" element={<MpesaTest />} />
+        <Route path="/payment-success/:bookingNumber" element={<PaymentSuccess />} />
+        <Route path="/payment-failed/:bookingNumber" element={<PaymentFailed />} />
 
-        {/* Optional: Confirmation */}
-        {/* <Route path="/confirmation" element={<ConfirmationPage />} /> */}
+        
       </Routes>
 
       <Footer />

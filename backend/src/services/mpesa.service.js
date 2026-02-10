@@ -1,45 +1,48 @@
-import axios from "axios";
-import { getAccessToken } from "../config/mpesaAuth.js";
+// src/services/mpesa.service.js
+import Payment from "../models/Payment.model.js";
+import { initiateStkPush } from "../api/mpesa.api.js";
+import {
+  markPaymentSuccess,
+  markPaymentFailed,
+} from "./payment.service.js";
 
-export const initiateStkPush = async ({
-  phone,
-  amount,
-  accountReference,
-  transactionDesc,
-}) => {
-  const token = await getAccessToken();
+export const sendStkPush = async ({ phone, amount, accountReference }) => {
+  return initiateStkPush({
+    phone,
+    amount,
+    accountReference,
+    transactionDesc: "IV Therapy Payment",
+  });
+};
 
-  const timestamp = new Date()
-    .toISOString()
-    .replace(/[^0-9]/g, "")
-    .slice(0, 14);
+export const handleMpesaCallback = async (payload) => {
+  const callback = payload?.Body?.stkCallback;
+  if (!callback) return;
 
-  const password = Buffer.from(
-    `${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY}${timestamp}`
-  ).toString("base64");
+  const {
+    CheckoutRequestID,
+    ResultCode,
+    ResultDesc,
+    CallbackMetadata,
+  } = callback;
 
-  const response = await axios.post(
-    `${process.env.MPESA_ENV}/mpesa/stkpush/v1/processrequest`,
-    {
-      BusinessShortCode: process.env.MPESA_SHORTCODE,
-      Password: password,
-      Timestamp: timestamp,
-      TransactionType: "CustomerPayBillOnline",
-      Amount: amount,
-      PartyA: phone,
-      PartyB: process.env.MPESA_SHORTCODE,
-      PhoneNumber: phone,
-      CallBackURL: process.env.MPESA_CALLBACK_URL,
-      AccountReference: accountReference,
-      TransactionDesc: transactionDesc,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const payment = await Payment.findOne({
+    checkoutRequestId: CheckoutRequestID,
+  });
 
-  return response.data;
+  if (!payment) return;
+
+  if (ResultCode === 0) {
+    const receipt =
+      CallbackMetadata?.Item?.find(
+        (i) => i.Name === "MpesaReceiptNumber"
+      )?.Value;
+
+    await markPaymentSuccess(payment._id, {
+      mpesaReceipt: receipt,
+      mpesaResultDesc: ResultDesc,
+    });
+  } else {
+    await markPaymentFailed(payment._id, ResultDesc);
+  }
 };

@@ -73,14 +73,7 @@ const Navbar = () => {
               Contact
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/mpesa"
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
-              mpesatest
-            </NavLink>
-          </li>
+
         </ul>
 
         <button
