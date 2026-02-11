@@ -1,17 +1,22 @@
+// src/routes/payment.routes.js
 import express from "express";
-import { stkPushController, getPaymentStatusController, markCashPaymentController } from "../controllers/payment.controller.js";
+import {
+  getPaymentStatusController,
+  markCashPaymentController,
+} from "../controllers/payment.controller.js";
 
 const router = express.Router();
-// M-PESA routes
 
-// --------Initiate STK Push-------
-router.post("/mpesa/stk-push", stkPushController);
+// Get latest payment status by booking number
+router.get(
+  "/status/:bookingNumber",
+  getPaymentStatusController
+);
 
-// -------Poll payment status--------
-router.get("/status/:bookingNumber", getPaymentStatusController);
-
-
-// Cash payment route
-router.post("/cash", markCashPaymentController);
+// Mark cash payment (pay on visit)
+router.post(
+  "/cash",
+  markCashPaymentController
+);
 
 export default router;

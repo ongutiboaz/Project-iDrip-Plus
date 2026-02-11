@@ -1,0 +1,106 @@
+@use "sass:math";
+@use "sass:color";
+@use "./variables" as *;
+
+/* ==================================================
+   REM CONVERTER
+   Converts px → rem
+   Example: rem(16) → 1rem
+   ================================================== */
+
+@function rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+
+/* ==================================================
+   SPACING MULTIPLIER
+   Example: space(3) → 3 * base spacing
+   ================================================== */
+
+@function space($multiplier) {
+  @return $multiplier * 1rem;
+}
+
+
+/* ==================================================
+   COLOR ALPHA
+   Example: alpha($pelorous, 0.2)
+   ================================================== */
+
+@function alpha($color, $opacity) {
+  @return color.change($color, $alpha: $opacity);
+}
+
+
+/* ==================================================
+   COLOR LIGHTEN
+   Example: lighten($pelorous, 10%)
+   ================================================== */
+
+@function lighten-color($color, $amount) {
+  @return color.scale($color, $lightness: $amount);
+}
+
+
+/* ==================================================
+   COLOR DARKEN
+   ================================================== */
+
+@function darken-color($color, $amount) {
+  @return color.scale($color, $lightness: -$amount);
+}
+
+
+/* ==================================================
+   FLUID TYPOGRAPHY
+   Example:
+   font-size: fluid(16, 22);
+   ================================================== */
+
+@function fluid($min, $max, $min-vw: 320, $max-vw: 1200) {
+  $slope: math.div(($max - $min), ($max-vw - $min-vw));
+  $y-intercept: $min - $slope * $min-vw;
+
+  @return clamp(
+    #{$min}px,
+    #{$y-intercept}px + #{$slope * 100}vw,
+    #{$max}px
+  );
+}
+
+
+/* ==================================================
+   Z-INDEX MANAGER
+   Keeps layering organized
+   ================================================== */
+
+$z-layers: (
+  base: 1,
+  dropdown: 100,
+  sticky: 500,
+  overlay: 1000,
+  modal: 2000,
+  toast: 3000
+);
+
+@function z($layer) {
+  @return map-get($z-layers, $layer);
+}
+
+
+/* ==================================================
+   SHADOW GENERATOR
+   Example: box-shadow: shadow(md);
+   ================================================== */
+
+$shadow-map: (
+  sm: 0 2px 6px rgba(0, 0, 0, 0.05),
+  md: 0 8px 20px rgba(0, 0, 0, 0.08),
+  lg: 0 15px 40px rgba(0, 0, 0, 0.12),
+  xl: 0 25px 60px rgba(0, 0, 0, 0.18)
+);
+
+@function shadow($size) {
+  @return map-get($shadow-map, $size);
+}

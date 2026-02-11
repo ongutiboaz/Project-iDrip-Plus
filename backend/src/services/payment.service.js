@@ -2,8 +2,9 @@
 import Payment from "../models/Payment.model.js";
 import Booking from "../models/Booking.model.js";
 
-const MAX_MPESA_ATTEMPTS = 2;
-
+/**
+ * Get next attempt number per booking + method
+ */
 export const getNextAttemptNumber = async (bookingId, method) => {
   const last = await Payment.findOne({ booking: bookingId, method })
     .sort({ attemptNumber: -1 });
@@ -11,27 +12,16 @@ export const getNextAttemptNumber = async (bookingId, method) => {
   return last ? last.attemptNumber + 1 : 1;
 };
 
-export const isMpesaLocked = async (bookingId) => {
-  const failedAttempts = await Payment.countDocuments({
-    booking: bookingId,
-    method: "mpesa",
-    status: "failed",
-  });
-
-  return failedAttempts >= MAX_MPESA_ATTEMPTS;
-};
-
+/**
+ * Create a generic payment attempt (used by mpesa, card later)
+ */
 export const createPaymentAttempt = async ({
   bookingId,
   bookingNumber,
   method,
   amount,
-  phone,
+  phone = null,
 }) => {
-  if (method === "mpesa" && await isMpesaLocked(bookingId)) {
-    throw new Error("MPESA_LOCKED");
-  }
-
   const attemptNumber = await getNextAttemptNumber(bookingId, method);
 
   return Payment.create({
@@ -45,6 +35,9 @@ export const createPaymentAttempt = async ({
   });
 };
 
+/**
+ * Mark payment success and lock booking
+ */
 export const markPaymentSuccess = async (paymentId, extra = {}) => {
   const payment = await Payment.findByIdAndUpdate(
     paymentId,
@@ -66,64 +59,55 @@ export const markPaymentSuccess = async (paymentId, extra = {}) => {
   return payment;
 };
 
+/**
+ * Mark payment failed
+ */
 export const markPaymentFailed = async (paymentId, reason) => {
   return Payment.findByIdAndUpdate(
     paymentId,
     {
       status: "failed",
-      mpesaResultDesc: reason,
+      failureReason: reason,
     },
     { new: true }
   );
 };
 
-
-// ---------------- GET PAYMENT STATUS ----------------
+/**
+ * Get latest payment status by bookingNumber
+ */
 export const getPaymentStatusByBookingNumber = async (bookingNumber) => {
   const payment = await Payment.findOne({ bookingNumber })
     .sort({ createdAt: -1 });
 
   if (!payment) {
-    return {
-      paymentStatus: "pending",
-      mpesaReceipt: null,
-    };
+    return { paymentStatus: "pending", receipt: null };
   }
 
   return {
-    paymentStatus: payment.status, // pending | success | failed
-    mpesaReceipt: payment.mpesaReceipt || null,
+    paymentStatus: payment.status,
+    receipt: payment.mpesaReceipt || null,
   };
 };
 
-
-//-------------------Cas
-
 /**
- * Create a cash payment and mark booking as "pay_on_visit"
- * @param {string} bookingNumber
- * @returns Payment document
+ * CASH payment creation (pay on visit)
  */
 export const createCashPayment = async (bookingNumber) => {
-  // Find booking
   const booking = await Booking.findOne({ bookingNumber });
   if (!booking) throw new Error("Booking not found");
 
-  // Create a payment entry
   const payment = await Payment.create({
     booking: booking._id,
     bookingNumber,
     method: "cash",
     amount: booking.amount || 0,
     status: "pending",
-    paidAt: null,
     attemptNumber: 1,
   });
 
-  // Update booking
   booking.paymentStatus = "pay_on_visit";
   await booking.save();
 
   return payment;
 };
-

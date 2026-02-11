@@ -5,9 +5,11 @@ import { stkPush, getPaymentStatus } from "../../services/paymentService";
 const POLL_INTERVAL = 4000; // 4 seconds
 const MAX_POLLS = 15;
 
-const MpesaPayment = ({ bookingNumber, amount, phone, onSuccess, onFailure }) => {
+const MpesaPayment = ({ bookingNumber, amount, phone: initialPhone, mpesaName: initialName, onSuccess, onFailure }) => {
   const [status, setStatus] = useState(PAYMENT_STATUS.IDLE);
   const [message, setMessage] = useState("");
+  const [phone, setPhone] = useState(initialPhone || "");
+  const [mpesaName, setMpesaName] = useState(initialName || "");
   const pollCount = useRef(0);
   const intervalRef = useRef(null);
 
@@ -22,7 +24,6 @@ const MpesaPayment = ({ bookingNumber, amount, phone, onSuccess, onFailure }) =>
   const startPolling = () => {
     intervalRef.current = setInterval(async () => {
       pollCount.current += 1;
-
       try {
         const res = await getPaymentStatus(bookingNumber);
 
@@ -50,6 +51,11 @@ const MpesaPayment = ({ bookingNumber, amount, phone, onSuccess, onFailure }) =>
   };
 
   const handlePay = async () => {
+    if (!phone || !mpesaName) {
+      setMessage("Please enter both phone number and M-Pesa name");
+      return;
+    }
+
     setStatus(PAYMENT_STATUS.INITIATING);
     setMessage("Initiating STK Push...");
 
@@ -58,6 +64,7 @@ const MpesaPayment = ({ bookingNumber, amount, phone, onSuccess, onFailure }) =>
         bookingNumber,
         amount,
         phone: normalizePhone(phone),
+        mpesaName,
       });
 
       setStatus(PAYMENT_STATUS.PENDING);
@@ -78,8 +85,34 @@ const MpesaPayment = ({ bookingNumber, amount, phone, onSuccess, onFailure }) =>
     status === PAYMENT_STATUS.INITIATING || status === PAYMENT_STATUS.PENDING;
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <p>M-Pesa Payment</p>
+
+      {/* Editable phone input */}
+      <label>
+        Phone Number
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          disabled={isLoading}
+          placeholder="e.g., 254701234567"
+          style={{ padding: "0.5rem", borderRadius: "6px", border: "1px solid #ccc" }}
+        />
+      </label>
+
+      {/* Editable M-Pesa name */}
+      <label>
+        M-Pesa Name
+        <input
+          type="text"
+          value={mpesaName}
+          onChange={(e) => setMpesaName(e.target.value)}
+          disabled={isLoading}
+          placeholder="Name registered on M-Pesa"
+          style={{ padding: "0.5rem", borderRadius: "6px", border: "1px solid #ccc" }}
+        />
+      </label>
 
       <button onClick={handlePay} disabled={isLoading}>
         {isLoading ? "Processing..." : `Pay KES ${amount}`}

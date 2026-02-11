@@ -1,0 +1,148 @@
+/* ==================================================
+   DESIGN TOKENS — GLOBAL VARIABLES
+   ================================================== */
+
+/* ===============================
+   BRAND COLORS
+================================ */
+$color-primary: #38a9c7;     // Pelorous (CTA / Links)
+$color-accent: #cf7a48;      // Raw Sienna (Tags / Highlights)
+
+$color-dark: #352530;        // Thunder (Headings)
+$color-muted: #6d585c;       // Zambezi (Body text)
+
+$color-white: #ffffff;
+$color-off-white: #f8f9fb;
+$off-white: #f8f9fb;              // Alias for bg-body
+$pelorous: #38a9c7;              // Alias for color-primary
+$white: #ffffff;                 // Alias for color-white
+
+
+/* ===============================
+   TEXT SYSTEM
+================================ */
+$text-heading: $color-dark;
+$text-body: $color-muted;
+$text-light: #9ca3af;
+$text-inverse: $color-white;
+$text-dark: $color-dark;
+$text-muted: $color-muted;
+
+
+/* ===============================
+   BACKGROUND SYSTEM
+================================ */
+$bg-body: $color-off-white;
+$bg-card: $color-white;
+$bg-primary: $color-primary;
+$bg-accent: $color-accent;
+
+
+/* ===============================
+   BORDER SYSTEM
+================================ */
+$border-light: #e5e7eb;
+$border-medium: #d1d5db;
+$border-dark: #9ca3af;
+$border-primary: $color-primary;
+
+
+/* ===============================
+   SPACING SCALE (8px System)
+================================ */
+$space-xxs: 0.25rem;  // 4px
+$space-xs: 0.5rem;    // 8px
+$space-sm: 0.75rem;   // 12px
+$space-md: 1rem;      // 16px
+$space-lg: 1.5rem;    // 24px
+$space-xl: 2rem;      // 32px
+$space-xxl: 3rem;     // 48px
+$space-3xl: 4rem;     // 64px
+$space-4xl: 6rem;     // 96px
+
+
+/* ===============================
+   LAYOUT
+================================ */
+$container-width: 80vw;
+$max-width: 1200px;
+$section-padding-y: $space-3xl;
+
+
+/* ===============================
+   BORDER RADIUS
+================================ */
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-xl: 32px;
+$radius-pill: 999px;
+
+
+/* ===============================
+   SHADOW SYSTEM
+================================ */
+$shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.12);
+
+
+/* ===============================
+   TRANSITIONS
+================================ */
+$transition-fast: 0.15s ease-in-out;
+$transition-base: 0.25s ease-in-out;
+$transition-slow: 0.4s ease-in-out;
+
+
+/* ===============================
+   Z-INDEX SCALE
+================================ */
+$z-dropdown: 1000;
+$z-sticky: 1100;
+$z-fixed: 1200;
+$z-modal-backdrop: 1300;
+$z-modal: 1400;
+$z-tooltip: 1500;
+
+
+/* ===============================
+   BREAKPOINTS (Mobile First)
+================================ */
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+
+
+/* ===============================
+   TYPOGRAPHY SCALE
+================================ */
+$fs-xs: 0.75rem;   // 12px
+$fs-sm: 0.875rem;  // 14px
+$fs-base: 1rem;    // 16px
+$fs-lg: 1.125rem;  // 18px
+$fs-xl: 1.25rem;   // 20px
+$fs-2xl: 1.5rem;   // 24px
+$fs-3xl: 2rem;     // 32px
+$fs-4xl: 2.5rem;   // 40px
+$fs-5xl: 3rem;     // 48px;
+
+
+/* ===============================
+   FONT WEIGHTS
+================================ */
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+
+
+/* ===============================
+   LINE HEIGHTS
+================================ */
+$lh-tight: 1.2;
+$lh-base: 1.6;
+$lh-relaxed: 1.8;

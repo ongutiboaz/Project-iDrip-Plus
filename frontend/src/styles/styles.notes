@@ -1,0 +1,22 @@
+src/
+ └── styles/
+      ├── abstracts/          // design tokens & helpers
+      │    ├── _variables.scss   // colors, spacing, radii, transitions
+      │    ├── _mixins.scss      // reusable mixins (buttons, flex/grid helpers)
+      │    └── _functions.scss   // optional Sass functions
+      │
+      ├── base/
+      │    ├── _reset.scss       // CSS reset or normalize
+      │    ├── _typography.scss  // font sizes, weights, line-heights
+      │    └── _globals.scss     // body/html defaults, base elements
+      │
+      ├── components/
+      │    ├── _navbar.scss      // component‑specific styles  //
+      │    ├── _buttons.scss     // reusable button styles     // for components they will be wit the file
+      │    └── _cards.scss       // reusable card styles       //
+      │
+      ├── layout/
+      │    ├── _grid.scss        // grid system helpers
+      │    └── _header.scss      // header layout styles
+      │
+      └── main.scss              // entry point that imports everything

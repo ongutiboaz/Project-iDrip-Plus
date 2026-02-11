@@ -1,0 +1,31 @@
+/* ===============================
+   GLOBAL STYLES
+================================ */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fb; // $off-white
+  color: #352530; // $text-dark
+}
+
+/* ===============================
+   PAGE WRAPPER
+   Content between Navbar and Footer
+================================ */
+.page-wrapper {
+  width: 80vw;          // 80% of viewport width
+  min-height: calc(100vh - 120px); // optionally leave space for navbar/footer
+  margin: 0 auto;       // center horizontally
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0;
+
+  @media (max-width: 768px) {
+    width: 90vw;        // slightly wider on mobile
+    padding: 1.5rem 0;
+  }
+}

@@ -1,0 +1,75 @@
+@use "./variables" as *;
+
+/* ==================================================
+   TEXT STYLES
+   ================================================== */
+
+%heading-primary {
+  font-size: $fs-4xl;
+  font-weight: $fw-bold;
+  line-height: $lh-tight;
+  color: $text-heading;
+}
+
+%heading-secondary {
+  font-size: $fs-2xl;
+  font-weight: $fw-semibold;
+  color: $text-heading;
+}
+
+%body-text {
+  font-size: $fs-base;
+  line-height: $lh-base;
+  color: $text-body;
+}
+
+
+/* ==================================================
+   CARD STYLE
+   ================================================== */
+
+%card {
+  background: $bg-card;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  box-shadow: $shadow-sm;
+}
+
+
+/* ==================================================
+   BUTTON STYLES
+   ================================================== */
+
+%btn-primary {
+  background: $color-primary;
+  color: $color-white;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-lg;
+  font-weight: $fw-semibold;
+  transition: all $transition-base;
+}
+
+%btn-outline {
+  background: transparent;
+  border: 2px solid $color-primary;
+  color: $color-primary;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-lg;
+  transition: all $transition-base;
+}
+
+
+/* ==================================================
+   VISUALLY HIDDEN (Accessibility)
+   ================================================== */
+
+%visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}

@@ -1,0 +1,5 @@
+// src/styles/base/_index.scss
+@forward "../abstracts/index";   // forward abstracts first (optional)
+@forward "reset";
+@forward "typography";
+@forward "globals";

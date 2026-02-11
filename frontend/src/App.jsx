@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.scss";
+
 
 // Layout
 import Navbar from "./components/layout/navbar/Navbar";
@@ -30,36 +32,38 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
 
-      <Routes>
-        {/* Home & Info */}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+      {/* Page content wrapper */}
+      <main className="main-content">
+        <Routes>
+          {/* Home & Info */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
 
-        {/* Services */}
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:id" element={<ServiceDetails />} />
-        <Route path="/drips" element={<Drips />} />
-        <Route path="/drips/:id" element={<DripDetails />} />
-        <Route path="/shots" element={<Shots />} />
-        <Route path="/shots/:id" element={<ShotDetails />} />
+          {/* Services */}
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:id" element={<ServiceDetails />} />
+          <Route path="/drips" element={<Drips />} />
+          <Route path="/drips/:id" element={<DripDetails />} />
+          <Route path="/shots" element={<Shots />} />
+          <Route path="/shots/:id" element={<ShotDetails />} />
 
-        {/* Booking */}
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/booking-summary" element={<BookingSummary />} />
+          {/* Booking */}
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/booking-summary" element={<BookingSummary />} />
 
-        {/* Payment */}
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/mpesa" element={<MpesaTest />} />
-        <Route path="/payment-success/:bookingNumber" element={<PaymentSuccess />} />
-        <Route path="/payment-failed/:bookingNumber" element={<PaymentFailed />} />
-
-        
-      </Routes>
+          {/* Payment */}
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/mpesa" element={<MpesaTest />} />
+          <Route path="/payment-success/:bookingNumber" element={<PaymentSuccess />} />
+          <Route path="/payment-failed/:bookingNumber" element={<PaymentFailed />} />
+        </Routes>
+      </main>
 
       <Footer />
     </BrowserRouter>
   );
 };
+
 
 export default App;

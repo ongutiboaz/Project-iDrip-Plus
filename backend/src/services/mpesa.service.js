@@ -1,48 +1,90 @@
 // src/services/mpesa.service.js
 import Payment from "../models/Payment.model.js";
-import { initiateStkPush } from "../api/mpesa.api.js";
 import {
-  markPaymentSuccess,
-  markPaymentFailed,
+    createPaymentAttempt,
+    markPaymentSuccess,
+    markPaymentFailed,
 } from "./payment.service.js";
 
-export const sendStkPush = async ({ phone, amount, accountReference }) => {
-  return initiateStkPush({
-    phone,
-    amount,
-    accountReference,
-    transactionDesc: "IV Therapy Payment",
-  });
+
+const MAX_MPESA_ATTEMPTS = 2;
+
+export const isMpesaLocked = async (bookingId) => {
+    const failedAttempts = await Payment.countDocuments({
+        booking: bookingId,
+        method: "mpesa",
+        status: "failed",
+    });
+
+    return failedAttempts >= MAX_MPESA_ATTEMPTS;
 };
 
+export const createMpesaPaymentAttempt = async (payload) => {
+    if (await isMpesaLocked(payload.bookingId)) {
+        throw new Error("MPESA_LOCKED");
+    }
+
+    return createPaymentAttempt({
+        ...payload,
+        method: "mpesa",
+    });
+};
+
+
+
+//------mpesa callback handler (to be called by mpesa api route)------
+
+
 export const handleMpesaCallback = async (payload) => {
-  const callback = payload?.Body?.stkCallback;
-  if (!callback) return;
+    const callback = payload?.Body?.stkCallback;
 
-  const {
-    CheckoutRequestID,
-    ResultCode,
-    ResultDesc,
-    CallbackMetadata,
-  } = callback;
+    // Ignore malformed payloads
+    if (!callback) {
+        return { ack: true, message: "Ignored" };
+    }
 
-  const payment = await Payment.findOne({
-    checkoutRequestId: CheckoutRequestID,
-  });
+    const {
+        CheckoutRequestID,
+        ResultCode,
+        ResultDesc,
+        CallbackMetadata,
+    } = callback;
 
-  if (!payment) return;
+    // Find payment attempt
+    const payment = await Payment.findOne({
+        checkoutRequestId: CheckoutRequestID,
+    });
 
-  if (ResultCode === 0) {
-    const receipt =
-      CallbackMetadata?.Item?.find(
-        (i) => i.Name === "MpesaReceiptNumber"
-      )?.Value;
+    if (!payment) {
+        return { ack: true, message: "Payment not found" };
+    }
+
+    // Idempotency guard
+    if (payment.status === "success") {
+        return { ack: true, message: "Already processed" };
+    }
+
+    // ❌ FAILED PAYMENT
+    if (ResultCode !== 0) {
+        await markPaymentFailed(
+            payment._id,
+            ResultDesc,
+            ResultCode
+        );
+
+        return { ack: true, message: "Failure processed" };
+    }
+
+    // ✅ SUCCESS PAYMENT
+    const metadata = {};
+    CallbackMetadata?.Item?.forEach((item) => {
+        metadata[item.Name] = item.Value;
+    });
 
     await markPaymentSuccess(payment._id, {
-      mpesaReceipt: receipt,
-      mpesaResultDesc: ResultDesc,
+        mpesaReceiptNumber: metadata.MpesaReceiptNumber,
+        phone: metadata.PhoneNumber,
     });
-  } else {
-    await markPaymentFailed(payment._id, ResultDesc);
-  }
+
+    return { ack: true, message: "Success processed" };
 };

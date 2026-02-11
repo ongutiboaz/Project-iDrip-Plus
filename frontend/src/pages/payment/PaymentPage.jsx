@@ -1,4 +1,3 @@
-// src/pages/payment/PaymentPage.jsx
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -11,16 +10,16 @@ const PaymentPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [booking, setBooking] = useState(null);
-  const [method, setMethod] = useState("mpesa");
+  const [method, setMethod] = useState(state?.method || "mpesa");
 
   useEffect(() => {
-    if (state?.bookingId) {
-      setBooking(state);
-      sessionStorage.setItem("currentBooking", JSON.stringify(state));
+    if (state?.booking) {
+      setBooking(state.booking);
+      sessionStorage.setItem("currentBooking", JSON.stringify(state.booking));
     } else {
       const saved = sessionStorage.getItem("currentBooking");
       if (saved) setBooking(JSON.parse(saved));
-      else navigate("/booking");
+      else navigate("/booking"); // fallback
     }
   }, [state, navigate]);
 
@@ -31,15 +30,22 @@ const PaymentPage = () => {
     bookingNumber: booking.bookingNumber,
     amount: booking.amount,
     phone: booking.phone,
-    onSuccess: () => navigate("/payment-success"),
-    onFailure: () => navigate("/payment-failed"),
+    onSuccess: () =>
+      navigate(`/payment-success/${booking.bookingNumber}`, { state: { method } }),
+    onFailure: () =>
+      navigate(`/payment-failed/${booking.bookingNumber}`, { state: { method } }),
   };
 
   return (
-    <div className="payment-page" style={{ maxWidth: "600px", margin: "2rem auto", padding: "0 1rem" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Complete Payment</h1>
+    <div
+      className="payment-page"
+      style={{ maxWidth: "600px", margin: "2rem auto", padding: "0 1rem" }}
+    >
+      <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
+        Complete Payment
+      </h1>
 
-      {/* --- Booking Summary Card --- */}
+      {/* Booking Summary */}
       <div
         className="booking-summary-card"
         style={{
@@ -51,9 +57,17 @@ const PaymentPage = () => {
           boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
         }}
       >
-        <h2 style={{ marginBottom: "1rem", color: "#111827" }}>Booking Summary</h2>
+        <h2 style={{ marginBottom: "1rem", color: "#111827" }}>
+          Booking Summary
+        </h2>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem 1.5rem" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "0.75rem 1.5rem",
+          }}
+        >
           <div>
             <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Booking Number</p>
             <p style={{ margin: 0 }}>{booking.bookingNumber}</p>
@@ -76,12 +90,14 @@ const PaymentPage = () => {
           </div>
           <div>
             <p style={{ margin: "0.25rem 0", fontWeight: 600 }}>Date</p>
-            <p style={{ margin: 0 }}>{booking.date || new Date().toLocaleDateString()}</p>
+            <p style={{ margin: 0 }}>
+              {booking.date || new Date().toLocaleDateString()}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* --- Payment Methods --- */}
+      {/* Payment Methods */}
       <PaymentMethodSelector method={method} setMethod={setMethod} />
 
       <div style={{ marginTop: "1.5rem" }}>

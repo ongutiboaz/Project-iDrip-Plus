@@ -1,0 +1,131 @@
+@use "sass:color";
+@use "./variables" as *;
+
+/* ==================================================
+   RESPONSIVE MIXIN (Mobile First)
+   Usage:
+   @include respond(md) { ... }
+   ================================================== */
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $bp-sm) { @content; }
+  }
+  @else if $breakpoint == md {
+    @media (min-width: $bp-md) { @content; }
+  }
+  @else if $breakpoint == lg {
+    @media (min-width: $bp-lg) { @content; }
+  }
+  @else if $breakpoint == xl {
+    @media (min-width: $bp-xl) { @content; }
+  }
+  @else if $breakpoint == 2xl {
+    @media (min-width: $bp-2xl) { @content; }
+  }
+}
+
+
+/* ==================================================
+   CONTAINER
+   ================================================== */
+
+@mixin container {
+  width: $container-width;
+  max-width: $max-width;
+  margin-inline: auto;
+}
+
+
+/* ==================================================
+   FLEX CENTER
+   ================================================== */
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ==================================================
+   GRID AUTO FIT
+   ================================================== */
+
+@mixin grid-auto($min: 250px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
+  gap: $space-lg;
+}
+
+
+/* ==================================================
+   CARD BASE
+   ================================================== */
+
+@mixin card-base {
+  background: $bg-card;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  box-shadow: $shadow-sm;
+  transition: transform $transition-base,
+              box-shadow $transition-base;
+}
+
+
+/* ==================================================
+   BUTTON BASE
+   ================================================== */
+
+@mixin button-base(
+  $bg: $color-primary,
+  $color: $color-white
+) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-sm $space-lg;
+  border-radius: $radius-pill;
+  font-weight: $fw-semibold;
+  font-size: $fs-sm;
+  cursor: pointer;
+  border: none;
+  transition: all $transition-base;
+  text-decoration: none;
+
+  background: $bg;
+  color: $color;
+
+  &:hover {
+    background: color.scale($bg, $lightness: -8%);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+
+/* ==================================================
+   SECTION WRAPPER
+   ================================================== */
+
+@mixin section {
+  padding-block: $section-padding-y;
+}
+
+
+/* ==================================================
+   HOVER LIFT EFFECT
+   ================================================== */
+
+@mixin hover-lift($distance: 6px) {
+  transition: transform $transition-base,
+              box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-$distance);
+    box-shadow: $shadow-md;
+  }
+}

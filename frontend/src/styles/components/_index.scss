@@ -1,0 +1,6 @@
+// src/styles/components/_index.scss
+@forward "navbar";
+@forward "buttons";
+@forward "cards";
+@forward "../components/hero";        // forward if you want hero available via components/index
+@forward "../components/whyChooseUs"; // forward if you want whyChooseUs available via components/index
