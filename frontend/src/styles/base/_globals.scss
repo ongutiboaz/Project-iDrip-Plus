@@ -1,8 +1,9 @@
 @use "../abstracts/index" as *;
+@use "./typography" as *;
 
 /* ==================================================
-   CSS RESET (Modern Minimal Reset)
-   ================================================== */
+   GLOBAL RESET
+================================================== */
 
 *,
 *::before,
@@ -23,18 +24,20 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
-  line-height: 1.6;
-  background-color: $off-white;
-  color: $text-dark;
+  width: 100vw;
+  font-family: $font-primary;
+  font-size: $fs-base;
+  font-weight: $fw-regular;
+  line-height: $lh-base;
+  background-color: $bg-body;
+  color: $text-heading;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 /* ==================================================
-   MEDIA DEFAULTS
-   ================================================== */
+   MEDIA ELEMENTS
+================================================== */
 
 img,
 picture,
@@ -45,25 +48,42 @@ svg {
   max-width: 100%;
 }
 
+/* ==================================================
+   FORM ELEMENTS
+================================================== */
+
 button,
 input,
 textarea,
 select {
   font: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 /* ==================================================
    LINKS
-   ================================================== */
+================================================== */
 
 a {
   text-decoration: none;
   color: inherit;
+  transition: color $transition-base;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-primary;
+  }
 }
 
 /* ==================================================
    LISTS
-   ================================================== */
+================================================== */
 
 ul,
 ol {
@@ -71,48 +91,64 @@ ol {
 }
 
 /* ==================================================
-   LAYOUT SYSTEM
-   ================================================== */
+   ROOT LAYOUT
+================================================== */
 
-/* App wrapper — enables sticky footer layout */
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Main content area (80% width centered) */
+
+/* Main content wrapper (between navbar & footer) */
+
 .main-content {
-  width: 80vw;
-  max-width: 1400px;
-  margin: 0 auto;
-  flex: 1; /* pushes footer down */
+  flex: 1;
+  width: 100%; // Default: mobile & tablet
+  max-width: 100%;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Section spacing */
+/* Desktop and above */
+@include respond(md) {
+  .main-content {
+    width: 90%;
+    max-width: $max-width;
+  }
+}
+
+
+/* ==================================================
+   SECTIONS
+================================================== */
+
 section {
-  padding: $space-xxl 0;
+  padding-block: $section-padding-y;
+  padding-inline: $section-padding-x;
 }
 
 /* ==================================================
-   CONTAINER UTILITY (Reusable)
-   ================================================== */
+   CONTAINER UTILITY
+================================================== */
 
 .container {
-  width: 80vw;
-  max-width: 1400px;
-  margin: 0 auto;
+  width: $container-width; // e.g. 80–90vw
+  max-width: $max-width;
+  margin-inline: auto;
 }
 
 /* ==================================================
-   SCROLLBAR (Optional but clean)
-   ================================================== */
+   SCROLLBAR (Optional Styling)
+================================================== */
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: $space-xs;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: &co;
+  background-color: $color-primary;
   border-radius: $radius-pill;
 }

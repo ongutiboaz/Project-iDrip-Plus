@@ -6,32 +6,28 @@
    Usage:
    @include respond(md) { ... }
    ================================================== */
-
 @mixin respond($breakpoint) {
-  @if $breakpoint == sm {
+  @if $breakpoint == xs {
+    @media (min-width: $bp-xs) { @content; }
+  } @else if $breakpoint == sm {
     @media (min-width: $bp-sm) { @content; }
-  }
-  @else if $breakpoint == md {
+  } @else if $breakpoint == md {
     @media (min-width: $bp-md) { @content; }
-  }
-  @else if $breakpoint == lg {
+  } @else if $breakpoint == lg {
     @media (min-width: $bp-lg) { @content; }
-  }
-  @else if $breakpoint == xl {
+  } @else if $breakpoint == xl {
     @media (min-width: $bp-xl) { @content; }
-  }
-  @else if $breakpoint == 2xl {
+  } @else if $breakpoint == 2xl {
     @media (min-width: $bp-2xl) { @content; }
   }
 }
-
 
 /* ==================================================
    CONTAINER
    ================================================== */
 
 @mixin container {
-  width: $container-width;
+  width: $container-width; //
   max-width: $max-width;
   margin-inline: auto;
 }
@@ -92,9 +88,10 @@
   border: none;
   transition: all $transition-base;
   text-decoration: none;
-
   background: $bg;
   color: $color;
+  //lacks align-self: flex-start; for buttons in flex containers, can be added in component styles as needed
+
 
   &:hover {
     background: color.scale($bg, $lightness: -8%);

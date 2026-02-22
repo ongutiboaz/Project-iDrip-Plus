@@ -23,9 +23,7 @@ import PaymentPage from "./pages/payment/PaymentPage";
 import MpesaTest from "./pages/mpesatest/mpesatest";
 import PaymentSuccess from "./pages/payment/PaymentSuccess";
 import PaymentFailed from "./pages/payment/PaymentFailed";
-
-// Optional: You can add a confirmation page later
-// import ConfirmationPage from "./pages/confirmation/ConfirmationPage";
+import "./App.scss";
 
 const App = () => {
   return (
@@ -33,7 +31,7 @@ const App = () => {
       <Navbar />
 
       {/* Page content wrapper */}
-      <main className="main-content">
+     <main className="main-content">
         <Routes>
           {/* Home & Info */}
           <Route path="/" element={<Home />} />

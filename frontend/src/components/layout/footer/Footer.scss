@@ -1,94 +1,121 @@
-.new-footer {
-  background: #f4f9ff;
-  color: #003b6d;
-  padding: 4rem 8%;
-  border-top: 1px solid #d6e9ff;
+@use "./../../../styles/abstracts/index" as *;
 
-  .footer-wrapper {
+/* ==================================================
+   FOOTER
+================================================== */
+
+.footer {
+  width: 100%;
+  background: $color-dark;
+  color: $color-white;
+  padding-top: $space-xxl;
+
+  &__container {
+    @include container;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2.8rem;
-  }
+    gap: $space-xl;
 
-  h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-  }
+    @include respond(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-  h4 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: #003b6d;
-  }
-
-  p {
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: #333;
-  }
-
-  .footer-nav ul {
-    list-style: none;
-    padding: 0;
-
-    li {
-      margin-bottom: 0.6rem;
-
-      a {
-        text-decoration: none;
-        color: #003b6d;
-        font-weight: 500;
-        transition: 0.2s;
-
-        &:hover {
-          color: #0076d6;
-        }
-      }
+    @include respond(lg) {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
-  .icons {
+  /* Brand */
+  &__logo-row {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+  }
+
+  &__logo {
+    width: rem(40);
+  }
+
+  &__title {
+    font-size: $fs-xl;
+    font-weight: $fw-bold;
+    color: $color-white;
+  }
+
+  &__description {
+    font-size: $fs-sm;
+    line-height: $lh-base;
+    color: alpha($color-white, 0.75);
+  }
+
+  /* Section */
+  &__heading {
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: $space-md;
+    color: $color-white;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
 
     a {
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      background: white;
-      border: 1px solid #cfe5ff;
-      border-radius: 50%;
-      transition: 0.25s ease;
+      font-size: $fs-sm;
+      color: alpha($color-white, 0.8);
+      transition: color $transition-base;
 
       &:hover {
-        background: #0076d6;
-        color: #fff;
-        border-color: #0076d6;
+        color: $color-primary;
       }
     }
   }
 
-  .footer-bottom {
-    text-align: center;
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    font-size: 0.9rem;
-    color: #003b6d;
-    border-top: 1px solid #d6e9ff;
+  /* Contact */
+  &__contact-item {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $fs-sm;
+    color: alpha($color-white, 0.85);
+    margin-bottom: $space-sm;
   }
-}
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .new-footer {
-    padding: 3rem 5%;
-    text-align: center;
+  /* Social */
+  &__socials {
+    display: flex;
+    gap: $space-md;
 
-    .icons {
-      justify-content: center;
+    a {
+      @include flex-center;
+      width: rem(36);
+      height: rem(36);
+      border-radius: $radius-pill;
+      background: alpha($color-white, 0.1);
+      transition: all $transition-base;
+
+      &:hover {
+        background: $color-primary;
+        transform: translateY(-3px);
+      }
+
+      svg {
+        width: rem(18);
+        height: rem(18);
+      }
     }
+  }
+
+  /* Bottom */
+  &__bottom {
+    text-align: center;
+    padding-block: $space-lg;
+    margin-top: $space-xl;
+    font-size: $fs-xs;
+    border-top: 1px solid alpha($color-white, 0.15);
+    color: alpha($color-white, 0.7);
   }
 }

@@ -26,47 +26,48 @@ const features = [
 const WhyChooseUs = () => {
   return (
     <section
-      className="why-us"
-      aria-labelledby="why-us-title"
-      aria-describedby="why-us-desc"
+      className="why"
+      aria-labelledby="why-title"
+      aria-describedby="why-subtitle"
       role="region"
     >
-      <header className="why-us__header">
-        <h2 id="why-us-title" className="why-us__title">
-          Why Choose iDripPlus?
-        </h2>
+      <div className="why__container">
 
-        <p id="why-us-desc" className="why-us__subtitle text-muted">
-          A trusted, convenient and safe IV therapy service across Nairobi.
-        </p>
-      </header>
+        <header className="why__header">
+          <h2 id="why-title" className="why__title">
+            Why Choose iDripPlus?
+          </h2>
 
-      <ul className="why-grid" role="list" aria-label="Key features">
-        {features.map(({ id, title, desc, icon: Icon }) => (
-          <li
-            key={id}
-            className="why-grid__item card"
-            role="listitem"
-            aria-labelledby={`${id}-title`}
-            aria-describedby={`${id}-desc`}
-          >
-            <span className="card__icon" aria-hidden="true">
-              <Icon size={32} strokeWidth={1.8} focusable={false} />
-            </span>
+          <p id="why-subtitle" className="why__subtitle">
+            A trusted, convenient and safe IV therapy service across Nairobi.
+          </p>
+        </header>
 
-            {/* Provide an accessible title and description */}
-            <h3 id={`${id}-title`} className="card__title">
-              {title}
-            </h3>
+        <ul className="why__grid" role="list" aria-label="Key features">
+          {features.map(({ id, title, desc, icon: Icon }) => (
+            <li
+              key={id}
+              className="why__card"
+              role="listitem"
+              aria-labelledby={`${id}-title`}
+              aria-describedby={`${id}-desc`}
+            >
+              <span className="why__icon" aria-hidden="true">
+                <Icon size={32} strokeWidth={1.8} focusable={false} />
+              </span>
 
-            <p id={`${id}-desc`} className="card__desc">
-              {desc}
-            </p>
-          </li>
-        ))}
-      </ul>
+              <h3 id={`${id}-title`} className="why__card-title">
+                {title}
+              </h3>
 
-     
+              <p id={`${id}-desc`} className="why__card-desc">
+                {desc}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+      </div>
     </section>
   );
 };

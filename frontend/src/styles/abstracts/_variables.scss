@@ -13,9 +13,6 @@ $color-muted: #6d585c;       // Zambezi (Body text)
 
 $color-white: #ffffff;
 $color-off-white: #f8f9fb;
-$off-white: #f8f9fb;              // Alias for bg-body
-$pelorous: #38a9c7;              // Alias for color-primary
-$white: #ffffff;                 // Alias for color-white
 
 
 /* ===============================
@@ -25,8 +22,6 @@ $text-heading: $color-dark;
 $text-body: $color-muted;
 $text-light: #9ca3af;
 $text-inverse: $color-white;
-$text-dark: $color-dark;
-$text-muted: $color-muted;
 
 
 /* ===============================
@@ -64,9 +59,12 @@ $space-4xl: 6rem;     // 96px
 /* ===============================
    LAYOUT
 ================================ */
-$container-width: 80vw;
+$container-width: 100%;
+// $page-width: 1200px;
 $max-width: 1200px;
-$section-padding-y: $space-3xl;
+$gutter-width: 24px;
+$section-padding-y: $space-xxl; // 48px vertical padding for sections
+$section-padding-x: $space-lg; // 24px horizontal padding for sections (can be overridden in .main-content for global page padding)
 
 
 /* ===============================
@@ -110,6 +108,7 @@ $z-tooltip: 1500;
 /* ===============================
    BREAKPOINTS (Mobile First)
 ================================ */
+$bp-xs: 320px;
 $bp-sm: 480px;
 $bp-md: 768px;
 $bp-lg: 1024px;
@@ -138,6 +137,9 @@ $fw-regular: 400;
 $fw-medium: 500;
 $fw-semibold: 600;
 $fw-bold: 700;
+
+
+
 
 
 /* ===============================

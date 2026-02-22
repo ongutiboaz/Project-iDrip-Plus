@@ -12,55 +12,59 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-container">
+      <div className="footer__container">
 
         {/* Brand */}
-        <div className="footer-brand">
-          <div className="logo-row">
-            <img src="/idriplogo.png" alt="iDripPlus Logo" className="footer-logo" />
-            <h2>iDripPlus</h2>
+        <div className="footer__brand">
+          <div className="footer__logo-row">
+            <img
+              src="/idriplogo.png"
+              alt="iDripPlus Logo"
+              className="footer__logo"
+            />
+            <h2 className="footer__title">iDripPlus</h2>
           </div>
-          <p>
+          <p className="footer__description">
             Mobile IV hydration and wellness delivered by licensed clinicians,
             right to your doorstep.
           </p>
         </div>
 
         {/* Navigation */}
-        <div className="footer-section">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="#packages">Packages</a></li>
-            <li><a href="#why">Why Choose Us</a></li>
-            <li><a href="#how">How It Works</a></li>
-            <li><a href="#faq">FAQ</a></li>
+        <div className="footer__section">
+          <h4 className="footer__heading">Explore</h4>
+          <ul className="footer__list">
+            <li><a href="#">Packages</a></li>
+            <li><a href="#">Why Choose Us</a></li>
+            <li><a href="#">How It Works</a></li>
+            <li><a href="#">FAQ</a></li>
           </ul>
         </div>
 
         {/* Contact */}
-        <div className="footer-section">
-          <h4>Contact</h4>
+        <div className="footer__section">
+          <h4 className="footer__heading">Contact</h4>
 
-          <div className="contact-item">
+          <div className="footer__contact-item">
             <Phone size={18} />
             <span>+254 700 000 000</span>
           </div>
 
-          <div className="contact-item">
+          <div className="footer__contact-item">
             <Mail size={18} />
             <span>info@idripplus.com</span>
           </div>
 
-          <div className="contact-item">
+          <div className="footer__contact-item">
             <MapPin size={18} />
             <span>Nairobi, Kenya</span>
           </div>
         </div>
 
         {/* Socials */}
-        <div className="footer-section">
-          <h4>Follow Us</h4>
-          <div className="social-icons">
+        <div className="footer__section">
+          <h4 className="footer__heading">Follow Us</h4>
+          <div className="footer__socials">
             <a href="#"><Facebook /></a>
             <a href="#"><Instagram /></a>
             <a href="#"><Twitter /></a>
@@ -68,8 +72,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom */}
-      <div className="footer-bottom">
+      <div className="footer__bottom">
         © {new Date().getFullYear()} iDripPlus — All Rights Reserved.
       </div>
     </footer>

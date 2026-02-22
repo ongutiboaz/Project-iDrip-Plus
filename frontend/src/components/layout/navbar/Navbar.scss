@@ -1,150 +1,234 @@
+@use "./../../../styles/abstracts/index" as *;
+
+/* ==================================================
+   NAVBAR — MOBILE FIRST
+================================================== */
+
 .navbar {
-  background-color: #fff;
-  width: 100vw;
-  height: 15vh;
-  display: grid;
-  align-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 50;
-  font-size: 4vw;
+  padding-inline: $space-lg;
+  z-index: z(sticky);
+  background: $bg-card;
+  // background: #25d366;
+  transition: box-shadow $transition-base,
+    background $transition-base;
 
-  .navbar-container {
-    display: grid;
-    grid-template-columns: max-content auto max-content;
-    align-items: center;
-    margin: 0 0.5em 0 0.5em;
+  &--scrolled {
+    box-shadow: shadow(md);
+  }
+}
 
-    .navbar-logo {
-      display: grid;
-      align-items: center;
-      text-decoration: none;
-      img {
-        width: 3em;
-      }
-    }
+/* ==================================================
+   NAV CONTAINER
+================================================== */
 
-    .navbar-menu li .active {
-      color: red; // highlight
-      font-weight: 600; // bolder
-      border-bottom: 2px solid red;
-    }
+.navbar__container {
+  @include container;
+  @include flex-center;
+  justify-content: space-between;
+  padding-block: $space-sm;
+}
 
-    .desktop-menu {
-      //  display: none; // hidden on mobile
-      display: grid;
-      grid-template-columns: repeat(5, max-content);
-      justify-content: end;
-      gap: 0.35em;
-      margin-right: 1em;
+/* ==================================================
+   LOGO
+================================================== */
 
-      list-style: none;
+.navbar__logo img {
+  height: rem(42);
+  object-fit: contain;
+}
 
-      li {
-        // margin-left: 0.5em;
-        // background-color: yellow;
-        display: flex;
-        align-items: center;
 
-        a {
-          text-decoration: none;
-          color: #202231;
-          font-weight: 500;
-          font-size: 0.3em;
 
-          transition: color 0.3s ease;
+/* ==================================================
+   MOBILE TOGGLE
+================================================== */
 
-          &:hover {
-            color: #1d4ed8; // Tailwind blue-500
-          }
-        }
-      }
-    }
+.navbar__toggle {
+  @include flex-center;
+  color: $text-heading;
+  padding: $space-xs;
+  border-radius: $radius-pill;
+  transition: background $transition-fast;
 
-    .navbar-booking-button {
-      background-color: #1d4ed8; // blue-600
-      color: #ffffff;
-      padding: 0.6em 1.4em;
-      border: none;
-      border-radius: 1em;
-      font-size: 0.35em;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s ease-in-out;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background: alpha($color-primary, 0.08);
+  }
+}
 
-      &:hover {
-        background-color: #2563eb; // blue-700
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      }
+/* Hide desktop elements on mobile */
+.navbar__menu--desktop,
+.navbar__cta--desktop {
+  display: none;
+}
 
-      &:active {
-        transform: scale(0.97);
-      }
-    }
+
+
+/* ==================================================
+   MOBILE OVERLAY MENU
+================================================== */
+
+.navbar__mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: z(overlay);
+  background: $bg-card;
+  // background: red;
+
+  display: flex;
+  flex-direction: column;
+  padding: $space-lg;
+
+  transform: translateX(100%);
+  transition: transform $transition-slow;
+}
+
+.navbar__mobile-menu--open {
+  transform: translateX(0);
+}
+
+/* ==================================================
+   MOBILE HEADER
+================================================== */
+
+.navbar__mobile-header {
+  @include flex-center;
+  justify-content: space-between;
+
+  img {
+    height: rem(50);
+  }
+}
+
+.navbar__mobile-close {
+  @include flex-center;
+  background: $bg-body;
+  padding: $space-xs;
+  border-radius: $radius-pill;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: alpha($color-primary, 0.1);
+  }
+}
+
+/* ==================================================
+   MOBILE NAV LIST
+================================================== */
+
+.navbar__mobile-list {
+  margin: $space-3xl 0 $space-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.navbar__mobile-link {
+  font-size: $fs-lg;
+  font-weight: $fw-medium;
+  color: $text-heading;
+  // padding-bottom: $space-xs;
+  border-bottom: 1px solid $border-light;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+/* ==================================================
+   MOBILE CTAs
+================================================== */
+
+.navbar__mobile-ctas {
+  // margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.navbar__cta--desktop {
+  display: none;
+}
+
+.navbar__cta {
+  @include button-base;
+}
+
+/* Call button override */
+.navbar__cta--call {
+  @include button-base($bg-body, $text-heading);
+}
+
+/* WhatsApp override */
+.navbar__cta--whatsapp {
+  @include button-base(#25d366, $color-white);
+}
+
+/* ==================================================
+   phone (sm)
+================================================== */
+
+
+@include respond(xs) {
+  .navbar__logo img {
+    height: rem(46);
   }
 
-  /* Logo */
+  .navbar__cta--desktop {
+    display: none;
+  }
+}
 
-  /* Hamburger for mobile */
-  .navbar-hamburger {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 0.5em;
-    cursor: pointer;
-    color: #111;
+/* ==================================================
+   TABLET (md)
+================================================== */
 
-    .icon-menu,
-    .icon-close {
-      font-size: 2rem;
-    }
+@include respond(md) {
+  .navbar__logo img {
+    height: rem(46);
   }
 
-  /* Desktop menu hidden by default on mobile */
+  // .navbar__cta--desktop {
+  //   display: none;
+  // }
+}
 
-  /* Mobile menu */
-  .mobile-menu {
+/* ==================================================
+   DESKTOP (lg)
+================================================== */
+
+@include respond(lg) {
+
+  /* Hide mobile */
+  .navbar__toggle,
+  .navbar__mobile-menu {
+    display: none;
+  }
+
+  /* Desktop menu */
+  .navbar__menu--desktop {
     display: flex;
-    flex-direction: column;
+    gap: $space-xl;
     align-items: center;
-    list-style: none;
-    padding: 1rem 0;
-    margin: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
 
-    li {
-      margin: 0.5rem 0;
+  .navbar__link {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $text-heading;
+    position: relative;
+    transition: color $transition-fast;
 
-      a {
-        font-size: 1.1rem;
-        text-decoration: none;
-        color: #111;
-        font-weight: 500;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: #1d4ed8;
-        }
-      }
+    &:hover {
+      color: $color-primary;
     }
   }
 
-  /* Responsive breakpoints */
-  @media (min-width: 768px) {
-    .navbar-hamburger {
-      display: none;
-    }
-
-    .desktop-menu {
-      display: grid;
-    }
-
-    .mobile-menu {
-      display: none;
-    }
+  /* Desktop CTA */
+  .navbar__cta--desktop {
+    display: inline-flex;
+    @include button-base;
   }
 }

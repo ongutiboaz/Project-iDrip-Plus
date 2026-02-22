@@ -1,138 +1,95 @@
 @use "../abstracts/index" as *;
 
 /* ==================================================
-   FONT SYSTEM
-   ================================================== */
+   TYPOGRAPHY
+================================================== */
 
+/* Font system */
 $font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-  Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+  Roboto, "Helvetica Neue", Arial, "Open Sans", sans-serif;
 
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
 
-/* ==================================================
-   FLUID TYPE SCALE
-   Using clamp() for responsive typography
-   ================================================== */
-
-/*
-Formula:
-clamp(min, preferred, max)
-
-This makes text scale smoothly between mobile and desktop.
-*/
-
-$fs-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
-$fs-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
-$fs-base: clamp(1rem, 0.95rem + 0.4vw, 1.125rem);
-$fs-lg: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
-$fs-xl: clamp(1.75rem, 1.5rem + 1vw, 2rem);
-$fs-2xl: clamp(2.2rem, 1.8rem + 1.5vw, 2.8rem);
-$fs-3xl: clamp(2.8rem, 2rem + 2vw, 3.5rem);
-
-/* ==================================================
-   BASE TYPOGRAPHY
-   ================================================== */
-
-body {
-  font-family: $font-primary;
-  font-size: $fs-base;
-  font-weight: $font-weight-regular;
-  color: $text-dark;
-}
-
-/* ==================================================
-   HEADINGS (Semantic)
-   ================================================== */
-
+/* Headings */
 h1,
 .h1 {
-  font-size: $fs-3xl;
-  font-weight: $font-weight-bold;
-  line-height: 1.1;
+  font-size: clamp(rem(32), 4vw, rem(48));
+  font-weight: $fw-bold;
+  line-height: $lh-tight;
   letter-spacing: -0.02em;
-  color: $text-dark;
+  color: $text-heading;
 }
 
 h2,
 .h2 {
   font-size: $fs-2xl;
-  font-weight: $font-weight-bold;
+  font-weight: $fw-bold;
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: $text-dark;
+  color: $text-heading;
 }
 
 h3,
 .h3 {
   font-size: $fs-xl;
-  font-weight: $font-weight-semibold;
+  font-weight: $fw-semibold;
   line-height: 1.25;
-  color: $text-dark;
+  color: $text-heading;
 }
 
 h4,
 .h4 {
   font-size: $fs-lg;
-  font-weight: $font-weight-semibold;
+  font-weight: $fw-semibold;
   line-height: 1.3;
-  color: $text-dark;
+  color: $text-heading;
 }
 
 h5,
 .h5 {
   font-size: $fs-base;
-  font-weight: $font-weight-medium;
+  font-weight: $fw-medium;
+  color: $text-heading;
 }
 
 h6,
 .h6 {
   font-size: $fs-sm;
-  font-weight: $font-weight-medium;
+  font-weight: $fw-medium;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  color: $text-heading;
 }
 
-/* ==================================================
-   PARAGRAPHS
-   ================================================== */
-
+/* Paragraphs */
 p {
   margin-bottom: $space-md;
-  color: $text-muted;
+  line-height: $lh-base;
+  font-size: $fs-base;
+  color: alpha($color-dark, 0.75); 
+  max-width: rem(540);
 }
 
-/* ==================================================
-   SMALL TEXT
-   ================================================== */
-
+/* Small text */
 .small {
   font-size: $fs-sm;
-  color: $text-muted;
+  color: $text-body;
+  line-height: $lh-base;
 }
 
-/* ==================================================
-   LEAD TEXT (Hero paragraphs)
-   ================================================== */
-
+/* Lead text */
 .lead {
   font-size: $fs-lg;
-  line-height: 1.6;
-  color: $text-muted;
+  line-height: $lh-base;
+  color: $text-body;
 }
 
-/* ==================================================
-   TEXT UTILITIES
-   ================================================== */
-
+/* Text utilities */
 .text-center {
   text-align: center;
 }
 
 .text-muted {
-  color: $text-muted;
+  color: $text-body;
 }
 
 .text-accent {
@@ -140,9 +97,9 @@ p {
 }
 
 .text-bold {
-  font-weight: $font-weight-bold;
+  font-weight: $fw-bold;
 }
 
 .text-semibold {
-  font-weight: $font-weight-semibold;
+  font-weight: $fw-semibold;
 }

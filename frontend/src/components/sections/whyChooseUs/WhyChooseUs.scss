@@ -1,63 +1,148 @@
-.why-us {
-  padding: 4rem 8%;
-  text-align: center;
+@use "../../../styles/abstracts/index" as *;
 
-  h2 {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #003b6d;
+/* ==================================================
+   WHY CHOOSE US — PREMIUM VERSION
+================================================== */
+
+.why {
+  position: relative;
+
+  background: linear-gradient(
+    180deg,
+    $bg-body 0%,
+    alpha($color-primary, 0.03) 100%
+  );
+  // background-color: red;
+
+  &__container {
+    @include container;
+    position: relative;
+    z-index: 2;
   }
 
-  .subtitle {
-    max-width: 500px;
-    margin: 0.8rem auto 3rem;
-    font-size: 1.1rem;
-    color: #555;
-    line-height: 1.6;
+  /* ================= Header ================= */
+
+  &__header {
+    text-align: center;
+    margin-bottom: $space-4xl;
   }
 
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2rem;
+  &__title {
+    font-size: $fs-3xl;
+    font-weight: $fw-bold;
+    margin-bottom: $space-sm;
+    color: $text-heading;
   }
 
-  .card {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 14px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    transition: 0.25s ease;
+  &__subtitle {
+    max-width: 640px;
+    margin-inline: auto;
+    font-size: $fs-lg;
+    color: $text-body;
+  }
+
+  /* ================= Grid ================= */
+
+  &__grid {
+    @include grid-auto(280px);
+    list-style: none;
+  }
+
+  /* ================= Card ================= */
+
+  &__card {
+    position: relative;
+    padding: $space-xxl;
+    border-radius: $radius-xl;
+
+    background: alpha($color-white, 0.7);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid alpha($border-light, 0.6);
+
+    box-shadow: shadow(md);
+
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-md;
+
+    transition: transform $transition-base,
+                box-shadow $transition-base,
+                border-color $transition-base;
+
+    /* Subtle stagger animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+
+    &:nth-child(1) { animation-delay: 0.1s; }
+    &:nth-child(2) { animation-delay: 0.25s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
 
     &:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
-    }
+      transform: translateY(-10px);
+      box-shadow: shadow(lg);
+      border-color: alpha($color-primary, 0.4);
 
-    .icon {
-      font-size: 2.4rem;
-      display: inline-block;
-      margin-bottom: 1rem;
+      .why__icon {
+        transform: scale(1.12);
+        background: $color-primary;
+        color: $color-white;
+      }
     }
+  }
 
-    h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #003b6d;
-      margin-bottom: 0.7rem;
-    }
+  /* ================= Icon ================= */
 
-    p {
-      font-size: 0.95rem;
-      color: #555;
-      line-height: 1.5;
+  &__icon {
+    width: 72px;
+    height: 72px;
+    border-radius: $radius-pill;
+
+    background: alpha($color-primary, 0.08);
+    color: $color-primary;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all $transition-base;
+  }
+
+  /* ================= Card Text ================= */
+
+  &__card-title {
+    font-size: $fs-xl;
+    font-weight: $fw-semibold;
+    color: $text-heading;
+  }
+
+  &__card-desc {
+    font-size: $fs-base;
+    color: $text-body;
+    line-height: $lh-relaxed;
+    max-width: 300px;
+  }
+
+  /* ================= Responsive ================= */
+
+  @include respond(md) {
+    &__title {
+      font-size: $fs-4xl;
     }
   }
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .why-us {
-    padding: 3rem 5%;
+/* ==================================================
+   Entrance Animation
+================================================== */
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

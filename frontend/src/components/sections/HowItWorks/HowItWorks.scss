@@ -1,109 +1,104 @@
-.how-section {
-  padding: 5rem 8%;
-  text-align: center;
-  background: #f9fcff;
+@use "../../../styles/abstracts/index" as *;
 
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #003b6d;
-  }
+/* ==================================================
+   HOW IT WORKS PAGE
+================================================== */
 
-  .subtitle {
-    margin: 0.8rem auto 3rem;
-    color: #555;
-    font-size: 1.1rem;
-    max-width: 500px;
-    line-height: 1.6;
-  }
+.how-it-works {
+  // background-color: aqua;
 
-  .steps-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    max-width: 850px;
-    margin: auto;
-    position: relative;
-  }
+  /* Hero */
+  .how-hero {
+    text-align: center;
+    padding-block: $space-3xl;
+    
+    background: $bg-primary;
+    color: $color-white;
 
-  /* Vertical line */
-  .steps-container::before {
-    content: "";
-    position: absolute;
-    left: 25px;
-    top: 0;
-    height: 100%;
-    width: 3px;
-    background: #cfe7ff;
-    border-radius: 2px;
-  }
-
-  .step {
-    display: flex;
-    gap: 1.8rem;
-    align-items: flex-start;
-    position: relative;
-  }
-
-  .step-number {
-    background: #0076d6;
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 4px 12px rgba(0, 118, 214, 0.2);
-  }
-
-  .step-content {
-    background: white;
-    padding: 1.5rem 1.8rem;
-    border-radius: 14px;
-    width: 100%;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
-    text-align: left;
-    transition: 0.25s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .step-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.6rem;
-      display: inline-block;
-    }
-
-    h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #003b6d;
+    h1 {
+      font-size: $fs-4xl;
+      margin-bottom: $space-md;
     }
 
     p {
-      color: #555;
-      font-size: 0.98rem;
-      line-height: 1.55;
+      max-width: 600px;
+      margin-inline: auto;
+      opacity: 0.9;
     }
   }
-}
 
-/* Mobile */
-@media (max-width: 768px) {
-  .how-section {
-    padding: 3rem 5%;
+  /* Steps */
+  .how-steps {
+    padding-block: $space-3xl;
+
+    .steps-grid {
+      @include grid-auto(260px);
+    }
+
+    .step-card {
+      @include card-base;
+      text-align: center;
+      position: relative;
+
+      .step-number {
+        display: inline-block;
+        font-size: $fs-sm;
+        font-weight: $fw-bold;
+        color: $color-primary;
+        margin-bottom: $space-sm;
+      }
+
+      h3 {
+        margin-bottom: $space-sm;
+      }
+
+      p {
+        font-size: $fs-sm;
+      }
+
+      @include hover-lift(8px);
+    }
   }
 
-  .steps-container::before {
-    left: 18px;
+  /* Safety */
+  .how-safety {
+    background: $bg-card;
+    padding-block: $space-3xl;
+    text-align: center;
+
+    h2 {
+      margin-bottom: $space-lg;
+    }
+
+    ul {
+      display: grid;
+      gap: $space-md;
+      max-width: 600px;
+      margin-inline: auto;
+
+      li {
+        background: $bg-body;
+        padding: $space-md;
+        border-radius: $radius-md;
+        box-shadow: $shadow-sm;
+      }
+    }
   }
 
-  .step-number {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.8rem;
+  /* CTA */
+  .how-cta {
+    text-align: center;
+    padding-block: $space-3xl;
+    background: $color-primary;
+    color: $color-white;
+
+    h2 {
+      margin-bottom: $space-lg;
+    }
+
+    .btn-primary {
+      @include button-base($color-white, $color-primary);
+    }
   }
+
 }
