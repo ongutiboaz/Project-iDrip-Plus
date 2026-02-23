@@ -1,11 +1,10 @@
-# Node modules
+# Dependencies
 node_modules/
 
-# Environment files
-*.env
-*.env.local
-*.env.development
-*.env.production
+# Environment variables
+.env
+.env.local
+.env.*.local
 
 # Logs
 logs
@@ -15,10 +14,22 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build folders
-frontend/build/
-admin/build/
-backend/dist/
+dist/
+build/
 
 # OS files
 .DS_Store
 Thumbs.db
+
+# Vite
+.vite/
+
+# Coverage
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.local
